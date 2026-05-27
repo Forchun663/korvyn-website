@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
 import {
   ArrowRight,
@@ -214,7 +214,7 @@ const trail = [
   },
 ];
 
-function KorvynMark({ size = "h-16 w-16" }) {
+const KorvynMark = React.memo(function KorvynMark({ size = "h-16 w-16" }) {
   return (
     <div className={`relative flex ${size} shrink-0 items-center justify-center`}>
       <div className="absolute inset-0 rounded-2xl bg-cyan-400/30 blur-2xl animate-[pulse_3s_infinite]" />
@@ -223,9 +223,9 @@ function KorvynMark({ size = "h-16 w-16" }) {
       <div className="absolute bottom-[14%] right-[6%] h-[16%] w-[55%] rotate-45 rounded-full bg-blue-300/90" />
     </div>
   );
-}
+});
 
-function WhaleIcon({ className = "" }) {
+const WhaleIcon = React.memo(function WhaleIcon({ className = "" }) {
   return (
     <svg viewBox="0 0 120 80" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M14 43C21 22 49 14 75 21C94 26 105 39 109 52C94 50 79 57 61 57H32C20 57 10 53 14 43Z" fill="currentColor" opacity="0.92" />
@@ -236,7 +236,7 @@ function WhaleIcon({ className = "" }) {
       <path d="M48 57C53 66 67 66 73 57" stroke="#020617" strokeWidth="4" strokeLinecap="round" opacity="0.3" />
     </svg>
   );
-}
+});
 
 function useMouseParallax() {
   const mouseX = useMotionValue(0);
@@ -261,24 +261,25 @@ function CreatureIcon({ type }) {
   return <Sparkles className="h-16 w-16 text-white" />;
 }
 
-function CodeCube({ theme, smoothX, smoothY, isLeft }) {
+const CodeCube = React.memo(function CodeCube({ theme, smoothX, smoothY, isLeft, isInView }) {
+  if (!isInView) return null;
   const rotateX = useTransform(smoothY, [-400, 400], [10, -10]);
   const rotateY = useTransform(smoothX, [-600, 600], [-15, 15]);
   const x = useTransform(smoothX, [-600, 600], [isLeft ? 15 : -15, isLeft ? -15 : 15]);
   const y = useTransform(smoothY, [-400, 400], [-12, 12]);
   return (
     <motion.div
-      style={{ x, y, rotateX, rotateY, transformStyle: "preserve-3d" }}
+      style={{ x, y, rotateX, rotateY, transformStyle: "preserve-3d", willChange: "transform" }}
       className={`absolute ${
         isLeft ? "left-8 xl:left-24" : "right-8 xl:right-24"
       } top-1/2 -translate-y-1/2 hidden h-56 w-56 rounded-[2.5rem] border border-white/10 bg-gradient-to-br ${theme} p-[1px] shadow-3xl lg:block z-0`}
     >
       <div className="absolute inset-0 rounded-[2.4rem] bg-gradient-to-br from-white/[0.08] to-transparent opacity-30 blur-sm" />
-      <div className="absolute inset-[1px] rounded-[2.3rem] border border-white/10 bg-black/75 p-6 shadow-3xl backdrop-blur-xl flex flex-col justify-center">
+      <div className="absolute inset-[1px] rounded-[2.3rem] border border-white/10 bg-black/75 p-6 shadow-3xl backdrop-blur-xl flex flex-col justify-center font-space">
         {["<div>", "const site", "deploy()", "</web>"].map((line, i) => (
           <motion.div
             key={line}
-            className="mb-3 rounded-full bg-white/5 border border-white/5 px-4 py-2 text-xs font-bold text-cyan-100/90 font-space text-center"
+            className="mb-3 rounded-full bg-white/5 border border-white/5 px-4 py-2 text-xs font-bold text-cyan-100/90 font-space text-center animate-pulse"
             animate={{ x: [0, i % 2 ? 8 : -8, 0] }}
             transition={{ duration: 4 + i, repeat: Infinity, ease: "easeInOut" }}
           >
@@ -288,16 +289,17 @@ function CodeCube({ theme, smoothX, smoothY, isLeft }) {
       </div>
     </motion.div>
   );
-}
+});
 
-function Creature({ type = "sparkles", theme, index, smoothX, smoothY, isLeft }) {
+const Creature = React.memo(function Creature({ type = "sparkles", theme, index, smoothX, smoothY, isLeft, isInView }) {
+  if (!isInView) return null;
   const x = useTransform(smoothX, [-600, 600], [isLeft ? 15 : -15, isLeft ? -15 : 15]);
   const y = useTransform(smoothY, [-400, 400], [index % 2 ? -12 : 12, index % 2 ? 12 : -12]);
   const rotateX = useTransform(smoothY, [-400, 400], [6, -6]);
   const rotateY = useTransform(smoothX, [-600, 600], [-10, 10]);
   return (
     <motion.div
-      style={{ x, y, rotateX, rotateY, transformStyle: "preserve-3d" }}
+      style={{ x, y, rotateX, rotateY, transformStyle: "preserve-3d", willChange: "transform" }}
       className={`absolute ${
         isLeft ? "left-8 xl:left-24" : "right-8 xl:right-24"
       } top-1/2 -translate-y-1/2 hidden h-56 w-56 rounded-[2.5rem] border border-white/10 bg-gradient-to-br ${theme} p-[1px] shadow-3xl lg:block z-0`}
@@ -320,39 +322,41 @@ function Creature({ type = "sparkles", theme, index, smoothX, smoothY, isLeft })
       </div>
     </motion.div>
   );
-}
+});
 
-function DotSwarm({ theme, index }) {
+const DotSwarm = React.memo(function DotSwarm({ theme, index, isInView }) {
+  if (!isInView) return null;
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-40">
-      {Array.from({ length: 5 }).map((_, group) => (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-30">
+      {Array.from({ length: 3 }).map((_, group) => (
         <motion.div
           key={`swarm-${index}-${group}`}
           className="absolute"
           style={{
-            left: `${4 + ((group * 21 + index * 11) % 92)}%`,
-            top: `${8 + ((group * 17 + index * 7) % 80)}%`,
+            left: `${10 + ((group * 25 + index * 13) % 80)}%`,
+            top: `${15 + ((group * 20 + index * 9) % 70)}%`,
+            willChange: "transform",
           }}
           animate={{
-            x: [0, group % 2 ? 90 : -90, 0],
-            y: [0, group % 2 ? -45 : 45, 0],
-            rotate: [0, 15, -15, 0],
+            x: [0, group % 2 ? 60 : -60, 0],
+            y: [0, group % 2 ? -30 : 30, 0],
+            rotate: [0, 10, -10, 0],
           }}
           transition={{
-            duration: 16 + group * 2,
+            duration: 18 + group * 3,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: group * 0.4,
+            delay: group * 0.5,
           }}
         >
-          <div className="relative h-14 w-24">
-            {Array.from({ length: 12 }).map((_, dot) => (
+          <div className="relative h-12 w-20">
+            {Array.from({ length: 8 }).map((_, dot) => (
               <span
                 key={`dot-${dot}`}
-                className={`absolute h-1.5 w-1.5 rounded-full bg-gradient-to-br ${theme} opacity-70`}
+                className={`absolute h-1.5 w-1.5 rounded-full bg-gradient-to-br ${theme} opacity-60`}
                 style={{
-                  left: `${10 + (dot % 6) * 15}%`,
-                  top: `${20 + Math.sin(dot) * 12 + Math.floor(dot / 6) * 20}%`,
+                  left: `${15 + (dot % 4) * 20}%`,
+                  top: `${25 + Math.sin(dot) * 8 + Math.floor(dot / 4) * 25}%`,
                 }}
               />
             ))}
@@ -361,40 +365,42 @@ function DotSwarm({ theme, index }) {
       ))}
     </div>
   );
-}
+});
 
-function WorldPieces({ type, theme, index }) {
-  const count = type === "clouds" ? 14 : type === "leaves" ? 22 : type === "wheels" ? 8 : 14;
+const WorldPieces = React.memo(function WorldPieces({ type, theme, index, isInView }) {
+  if (!isInView) return null;
+  const count = type === "clouds" ? 8 : type === "leaves" ? 12 : type === "wheels" ? 5 : 8;
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-40">
+    <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-30">
       {Array.from({ length: count }).map((_, i) => {
-        const left = 1 + ((i * 23 + index * 13) % 98);
-        const top = 3 + ((i * 19 + index * 11) % 92);
+        const left = 2 + ((i * 27 + index * 17) % 94);
+        const top = 5 + ((i * 21 + index * 13) % 86);
         const size =
-          type === "clouds" ? 90 + (i % 3) * 40 : type === "leaves" ? 24 + (i % 4) * 8 : type === "wheels" ? 80 + (i % 2) * 40 : 32 + (i % 5) * 12;
+          type === "clouds" ? 80 + (i % 3) * 30 : type === "leaves" ? 20 + (i % 4) * 6 : type === "wheels" ? 60 + (i % 2) * 30 : 28 + (i % 5) * 10;
         const height = type === "clouds" ? size * 0.45 : size;
         const shape = type === "leaves" ? "rounded-[60%_40%_70%_30%]" : "rounded-full";
         return (
           <motion.span
             key={`${type}-${index}-${i}`}
-            className={`absolute border border-white/5 bg-gradient-to-br ${theme} ${shape} opacity-15 backdrop-blur-md`}
+            className={`absolute border border-white/5 bg-gradient-to-br ${theme} ${shape} opacity-10 backdrop-blur-sm`}
             style={{
               left: `${left}%`,
               top: `${top}%`,
               width: size,
               height,
               transformStyle: "preserve-3d",
+              willChange: "transform",
             }}
             animate={{
-              y: type === "leaves" ? [0, 160, 0] : [0, -35, 0],
-              x: type === "leaves" ? [0, i % 2 ? 45 : -45, 0] : [0, i % 2 ? 22 : -22, 0],
-              rotateX: type === "wheels" ? [0, 360] : [0, i % 2 ? 20 : -20, 0],
-              rotateY: type === "wheels" ? [0, -360] : [0, i % 2 ? -18 : 18, 0],
-              rotateZ: type === "wheels" ? [0, 360] : [0, i % 2 ? 30 : -30, 0],
-              scale: [1, 1.08, 1],
+              y: type === "leaves" ? [0, 100, 0] : [0, -25, 0],
+              x: type === "leaves" ? [0, i % 2 ? 30 : -30, 0] : [0, i % 2 ? 15 : -15, 0],
+              rotateX: type === "wheels" ? [0, 360] : [0, i % 2 ? 15 : -15, 0],
+              rotateY: type === "wheels" ? [0, -360] : [0, i % 2 ? -12 : 12, 0],
+              rotateZ: type === "wheels" ? [0, 360] : [0, i % 2 ? 20 : -20, 0],
+              scale: [1, 1.05, 1],
             }}
             transition={{
-              duration: type === "wheels" ? 15 + i : 10 + (i % 5),
+              duration: type === "wheels" ? 18 + i : 12 + (i % 5),
               repeat: Infinity,
               delay: i * 0.1,
               ease: "easeInOut",
@@ -404,76 +410,85 @@ function WorldPieces({ type, theme, index }) {
       })}
     </div>
   );
-}
+});
 
-function GlowOrbs({ theme, index }) {
+const GlowOrbs = React.memo(function GlowOrbs({ theme, index, isInView }) {
+  if (!isInView) return null;
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
       <motion.div
-        className={`absolute -left-20 top-10 h-[600px] w-[600px] rounded-full bg-gradient-to-br ${theme} opacity-25 blur-[120px]`}
-        animate={{ y: [0, -60, 0], x: [0, 40, 0], scale: [1, 1.2, 1] }}
-        transition={{ duration: 14 + index * 0.8, repeat: Infinity, ease: "easeInOut" }}
+        className={`absolute -left-20 top-10 h-[500px] w-[500px] rounded-full bg-gradient-to-br ${theme} opacity-20 blur-[100px]`}
+        animate={{ y: [0, -40, 0], x: [0, 30, 0], scale: [1, 1.1, 1] }}
+        transition={{ duration: 16 + index * 0.8, repeat: Infinity, ease: "easeInOut" }}
+        style={{ willChange: "transform" }}
       />
       <motion.div
-        className={`absolute -right-20 bottom-10 h-[700px] w-[700px] rounded-full bg-gradient-to-br ${theme} opacity-20 blur-[150px]`}
-        animate={{ y: [0, 60, 0], x: [0, -40, 0], scale: [1, 1.15, 1] }}
-        transition={{ duration: 16 + index * 0.6, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className={`absolute left-1/3 top-1/4 h-[400px] w-[400px] rounded-full bg-gradient-to-br ${theme} opacity-15 blur-[90px]`}
-        animate={{ scale: [1, 1.35, 1], x: [0, 20, 0], y: [0, -20, 0] }}
-        transition={{ duration: 10 + index * 0.4, repeat: Infinity, ease: "easeInOut" }}
+        className={`absolute -right-20 bottom-10 h-[600px] w-[600px] rounded-full bg-gradient-to-br ${theme} opacity-15 blur-[120px]`}
+        animate={{ y: [0, 40, 0], x: [0, -30, 0], scale: [1, 1.08, 1] }}
+        transition={{ duration: 18 + index * 0.6, repeat: Infinity, ease: "easeInOut" }}
+        style={{ willChange: "transform" }}
       />
     </div>
   );
-}
+});
 
-function FloatingWorld({ item, index, smoothX, smoothY }) {
+const FloatingWorld = React.memo(function FloatingWorld({ item, index, smoothX, smoothY, isInView }) {
   const visualType = item.visual === "wheels" ? "wheels" : item.visual;
   const isEven = index % 2 === 0;
-  return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden">
-      <GlowOrbs theme={item.theme} index={index} />
-      <WorldPieces type={visualType || "orbs"} theme={item.theme} index={index} />
-      <DotSwarm theme={item.theme} index={index} />
-      {(item.visual === "code" || item.id === "builds" || item.id === "ready") && (
-        <CodeCube theme={item.theme} smoothX={smoothX} smoothY={smoothY} isLeft={isEven} />
-      )}
-      {item.creature && (
-        <Creature type={item.creature} theme={item.theme} index={index} smoothX={smoothX} smoothY={smoothY} isLeft={!isEven} />
-      )}
-    </div>
-  );
-}
 
-function SectionTransition({ theme, flip = false, index = -1 }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: isInView ? 1 : 0 }}
+      transition={{ duration: 0.8 }}
+      className="pointer-events-none absolute inset-0 overflow-hidden"
+    >
+      {isInView && (
+        <>
+          <GlowOrbs theme={item.theme} index={index} isInView={isInView} />
+          <WorldPieces type={visualType || "orbs"} theme={item.theme} index={index} isInView={isInView} />
+          <DotSwarm theme={item.theme} index={index} isInView={isInView} />
+          {(item.visual === "code" || item.id === "builds" || item.id === "ready") && (
+            <CodeCube theme={item.theme} smoothX={smoothX} smoothY={smoothY} isLeft={isEven} isInView={isInView} />
+          )}
+          {item.creature && (
+            <Creature type={item.creature} theme={item.theme} index={index} smoothX={smoothX} smoothY={smoothY} isLeft={index % 2 !== 0} isInView={isInView} />
+          )}
+        </>
+      )}
+    </motion.div>
+  );
+});
+
+const SectionTransition = React.memo(function SectionTransition({ theme, flip = false, index = -1, isInView }) {
+  if (!isInView) return null;
   return (
     <div className={`pointer-events-none absolute left-0 right-0 z-20 overflow-hidden ${flip ? "top-0 -scale-y-100" : "bottom-0"}`}>
-      <div className="relative h-32 md:h-48 w-full">
+      <div className="relative h-28 md:h-36 w-full">
         <motion.div
-          className={`absolute inset-x-[-10%] bottom-0 h-32 rounded-t-[100%] bg-gradient-to-r ${theme} opacity-20 blur-[80px] md:h-44`}
-          animate={{ x: [-40, 40, -40], scaleX: [1, 1.08, 1] }}
+          className={`absolute inset-x-[-10%] bottom-0 h-28 rounded-t-[100%] bg-gradient-to-r ${theme} opacity-15 blur-[60px] md:h-36`}
+          animate={{ x: [-30, 30, -30], scaleX: [1, 1.05, 1] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         />
         
-        <div className="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent blur-[1px] opacity-75" />
+        <div className="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent blur-[1px] opacity-60" />
 
-        {Array.from({ length: 8 }).map((_, i) => (
+        {Array.from({ length: 5 }).map((_, i) => (
           <motion.div
             key={`trans-cloud-${i}`}
-            className="absolute bottom-1 rounded-full bg-white/[0.04] backdrop-blur-xl"
+            className="absolute bottom-1 rounded-full bg-white/[0.02] backdrop-blur-md"
             style={{
-              left: `${5 + i * 12}%`,
-              width: `${100 + (i % 3) * 40}px`,
-              height: `${30 + (i % 3) * 15}px`,
+              left: `${10 + i * 20}%`,
+              width: `${80 + (i % 3) * 30}px`,
+              height: `${20 + (i % 3) * 10}px`,
             }}
             animate={{
-              y: [0, -12, 0],
-              x: [0, i % 2 ? 15 : -15, 0],
-              opacity: [0.1, 0.3, 0.1],
+              y: [0, -8, 0],
+              x: [0, i % 2 ? 10 : -10, 0],
+              opacity: [0.1, 0.2, 0.1],
             }}
             transition={{
-              duration: 8 + i * 0.5,
+              duration: 8 + i * 0.6,
               repeat: Infinity,
               ease: "easeInOut",
               delay: i * 0.2,
@@ -489,19 +504,19 @@ function SectionTransition({ theme, flip = false, index = -1 }) {
               y: [0, -10, 5, -5, 0],
             }}
             transition={{
-              x: { duration: 32, repeat: Infinity, ease: "linear" },
+              x: { duration: 36, repeat: Infinity, ease: "linear" },
               y: { duration: 8, repeat: Infinity, ease: "easeInOut" },
             }}
           >
-            <WhaleIcon className="w-full h-full opacity-35" />
+            <WhaleIcon className="w-full h-full opacity-20" />
           </motion.div>
         )}
       </div>
     </div>
   );
-}
+});
 
-function TrailConnector({ theme }) {
+const TrailConnector = React.memo(function TrailConnector({ theme }) {
   return (
     <div className="pointer-events-none absolute left-1/2 top-0 hidden h-full -translate-x-1/2 md:block">
       <motion.div
@@ -513,36 +528,45 @@ function TrailConnector({ theme }) {
       />
     </div>
   );
-}
+});
 
-function PricingCards({ item }) {
+const PricingCards = React.memo(function PricingCards({ item }) {
   if (!item.priceCards) return null;
   return (
-    <div className="mt-10 grid max-w-6xl gap-8 md:grid-cols-2 text-left mx-auto w-full z-10 relative">
+    <div className="mt-4 grid max-w-5xl gap-4 md:grid-cols-2 text-left mx-auto w-full z-10 relative items-stretch">
       {item.priceCards.map((card, index) => (
         <motion.div
           key={card.name}
-          initial={{ opacity: 0, y: 35 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: index * 0.18, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className={`relative overflow-hidden rounded-[2.8rem] border border-white/10 bg-gradient-to-b from-white/[0.08] to-white/[0.01] p-[1px] hover:border-white/20 transition-all duration-500 shadow-2xl hover:scale-[1.01] group`}
+          transition={{ delay: index * 0.1, duration: 0.5 }}
+          className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-b from-white/[0.08] to-white/[0.01] p-[1px] hover:border-white/20 transition-all duration-300 shadow-xl hover:scale-[1.01] group flex flex-col"
         >
-          <div className={`absolute -right-20 -top-20 h-48 w-48 rounded-full bg-gradient-to-br ${item.theme} opacity-10 blur-3xl group-hover:opacity-20 transition-opacity duration-500`} />
+          <div className={`absolute -right-16 -top-16 h-32 w-32 rounded-full bg-gradient-to-br ${item.theme} opacity-10 blur-2xl group-hover:opacity-15 transition-opacity duration-300`} />
 
-          <div className="relative h-full rounded-[2.7rem] bg-black/60 p-8 md:p-10 backdrop-blur-3xl flex flex-col justify-between">
-            <div>
-              <p className="font-accent text-xs font-black uppercase tracking-[0.25em] text-orange-300">{card.name}</p>
-              <h3 className="mt-4 font-display text-5xl font-bold tracking-tight text-white md:text-6xl">{card.price}</h3>
-              <p className="mt-4 text-sm leading-8 text-white/70">{card.text}</p>
-              <div className="mt-8 grid gap-2.5">
+          <div className="relative rounded-[1.95rem] bg-black/60 p-4 sm:p-5 backdrop-blur-2xl flex flex-col justify-between flex-grow h-full">
+            <div className="flex flex-col h-full justify-between gap-4 font-space">
+              {/* Header section with aligned height */}
+              <div className="flex flex-col gap-1 md:min-h-[56px] justify-center">
+                <p className="text-[10px] font-black uppercase tracking-[0.15em] text-orange-300">{card.name}</p>
+                <h3 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-white">{card.price}</h3>
+              </div>
+              
+              {/* Description section with aligned height */}
+              <div className="md:min-h-[48px] flex items-center">
+                <p className="text-[11px] sm:text-xs leading-relaxed text-white/60">{card.text}</p>
+              </div>
+
+              {/* Feature grid with exactly 4 rows (2 columns) */}
+              <div className="grid grid-cols-2 gap-1.5 mt-auto">
                 {card.list.map((point) => (
                   <div
                     key={point}
-                    className="flex items-center gap-3.5 rounded-2xl border border-white/5 bg-white/[0.03] p-3.5 hover:bg-white/[0.06] hover:border-white/10 transition duration-300"
+                    className="flex items-center gap-2 rounded-xl border border-white/5 bg-white/[0.02] px-2.5 py-1.5 hover:bg-white/[0.05] hover:border-white/10 transition duration-300 w-full"
                   >
-                    <span className={`h-2.5 w-2.5 shrink-0 rounded-full bg-gradient-to-br ${item.theme} shadow-lg`} />
-                    <span className="text-sm font-semibold text-white/85">{point}</span>
+                    <span className={`h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br ${item.theme} shadow-sm`} />
+                    <span className="text-[10px] sm:text-[11px] font-semibold text-white/80 whitespace-nowrap overflow-hidden text-ellipsis">{point}</span>
                   </div>
                 ))}
               </div>
@@ -552,102 +576,131 @@ function PricingCards({ item }) {
       ))}
     </div>
   );
-}
+});
 
-function TrailNode({ item, index, smoothX, smoothY }) {
-  const Icon = item.icon;
-  const isEven = index % 2 === 0;
+const TrailNode = React.memo(function TrailNode({ item, index, smoothX, smoothY, isInView }) {
+  const isPricing = item.id === "pricing";
 
   return (
-    <section id={item.id} className={`relative min-h-screen w-full overflow-hidden bg-gradient-to-br ${item.bg} text-white flex items-center`}>
+    <section 
+      id={item.id} 
+      className="relative h-screen min-h-screen w-full overflow-hidden bg-[#030712] text-white flex items-center snap-start"
+    >
+      <div className={`absolute inset-0 bg-gradient-to-br ${item.bg}`} />
+      
       {/* Full-width environmental layer */}
-      <FloatingWorld item={item} index={index} smoothX={smoothX} smoothY={smoothY} />
-      <SectionTransition theme={item.theme} flip index={index} />
+      <FloatingWorld item={item} index={index} smoothX={smoothX} smoothY={smoothY} isInView={isInView} />
+      <SectionTransition theme={item.theme} flip index={index} isInView={isInView} />
       {index < trail.length - 1 && <TrailConnector theme={item.theme} />}
 
-      {/* Medium-width content container - centered vertically and horizontally */}
-      <div className="relative z-10 w-full max-w-4xl mx-auto px-6 md:px-12 lg:px-20 py-24 flex flex-col items-center justify-center min-h-screen text-center">
-        
-        {/* Stage Identification Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-8 flex items-center gap-3.5 rounded-full border border-white/8 bg-white/5 px-5 py-2 font-space text-xs font-bold tracking-widest text-cyan-300"
-        >
-          <span className="h-2 w-2 rounded-full bg-cyan-400 shadow-md shadow-cyan-400 animate-pulse" />
-          STAGE {item.number} // {item.world.toUpperCase()}
-        </motion.div>
-
-        {/* Eyebrow Label */}
-        <p className="font-accent text-xs font-black uppercase tracking-[0.4em] text-orange-400 mb-4">{item.eyebrow}</p>
-
-        {/* Giant Title */}
-        <h2 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-white mb-6 max-w-4xl mx-auto">
-          {item.title}
-        </h2>
-
-        {/* Supporting description */}
-        <p className="text-base md:text-lg leading-relaxed text-white/70 mb-10 max-w-2xl mx-auto">
-          {item.body}
-        </p>
-
-        {/* Content Cards Grid or Pricing */}
-        {item.priceCards ? (
-          <PricingCards item={item} />
-        ) : (
-          <div className="grid sm:grid-cols-2 gap-4 w-full max-w-3xl mb-10 text-left mx-auto">
-            {item.points.map((point, pointIndex) => (
-              <motion.div
-                key={`${item.id}-${point}`}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: pointIndex * 0.05, duration: 0.5 }}
-                className="flex items-center gap-3.5 rounded-2xl border border-white/8 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/15 p-4.5 backdrop-blur-xl transition duration-300 hover:scale-[1.02] shadow-sm"
-              >
-                <span className={`h-2.5 w-2.5 shrink-0 rounded-full bg-gradient-to-br ${item.theme} shadow-md`} />
-                <span className="text-sm font-semibold leading-relaxed text-white/85">{point}</span>
-              </motion.div>
-            ))}
-          </div>
-        )}
-
-        {/* Node action buttons */}
-        <div className="flex flex-col items-center justify-center gap-4.5 sm:flex-row w-full sm:w-auto z-10 relative">
-          {index < trail.length - 1 ? (
-            <a
-              href={`#${trail[index + 1].id}`}
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 font-space text-sm font-black text-black shadow-xl hover:bg-orange-200 transition duration-300 hover:scale-[1.03] w-full sm:w-auto"
-            >
-              Next Stage ({trail[index + 1].number})
-              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </a>
-          ) : (
-            <a
-              href={owner.mailHref}
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 font-space text-sm font-black text-black shadow-xl hover:bg-cyan-200 transition duration-300 hover:scale-[1.03] w-full sm:w-auto"
-            >
-              Email Forchun
-              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </a>
-          )}
-          <a
-            href={owner.phoneHref}
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 hover:bg-white hover:text-black px-6 py-4 font-space text-sm font-black text-white transition duration-300 hover:scale-[1.03] backdrop-blur-xl w-full sm:w-auto"
+      {/* Medium-width content container - centered vertically and horizontally with explicit navbar top padding */}
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-6 md:px-12 lg:px-20 pt-20 md:pt-24 pb-8 flex flex-col items-center justify-start md:justify-center h-full text-center">
+        <div className="my-auto w-full flex flex-col items-center">
+          {/* 1. Eyebrow Label with Stage Badge integrated dynamically */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mb-3 flex flex-wrap items-center justify-center gap-3 font-space text-[10px] sm:text-xs font-bold tracking-[0.25em] text-cyan-300 uppercase"
           >
-            <PhoneCall className="h-5 w-5" />
-            Call Forchun
-          </a>
-        </div>
+            <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-md shadow-cyan-400 animate-pulse" />
+            {item.eyebrow}
+            <span className="text-white/20">|</span>
+            <span className="text-orange-400">STAGE {item.number} // {item.world}</span>
+          </motion.div>
 
+          {/* 2. Giant Title - Conditionally smaller font sizes for the pricing slide so it never overflows */}
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1, duration: 0.7 }}
+            className={`font-display font-bold leading-[1.15] tracking-tight text-white mb-3 max-w-4xl mx-auto ${
+              isPricing 
+                ? "text-xl sm:text-2xl md:text-3xl lg:text-[2.2rem]" 
+                : "text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
+            }`}
+          >
+            {item.title}
+          </motion.h2>
+
+          {/* 3. Supporting description */}
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.7 }}
+            className={`leading-relaxed text-white/70 mx-auto font-medium font-space ${
+              isPricing 
+                ? "text-[10px] sm:text-xs md:text-sm mb-4 max-w-xl" 
+                : "text-xs sm:text-sm md:text-base mb-6 max-w-2xl"
+            }`}
+          >
+            {item.body}
+          </motion.p>
+
+          {/* 4. Supporting visual/cards/buttons */}
+          {item.priceCards ? (
+            <PricingCards item={item} />
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 w-full max-w-3xl mb-6 text-left mx-auto">
+              {item.points.map((point, pointIndex) => (
+                <motion.div
+                  key={`${item.id}-${point}`}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: pointIndex * 0.04, duration: 0.5 }}
+                  className="flex items-center gap-3 rounded-xl border border-white/8 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/15 p-3 sm:p-3.5 backdrop-blur-xl transition duration-300 hover:scale-[1.02] shadow-sm font-space"
+                >
+                  <span className={`h-2 w-2 shrink-0 rounded-full bg-gradient-to-br ${item.theme} shadow-md`} />
+                  <span className="text-[11px] sm:text-xs md:text-sm font-semibold leading-relaxed text-white/85">{point}</span>
+                </motion.div>
+              ))}
+            </div>
+          )}
+
+          {/* Node action buttons */}
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row w-full sm:w-auto z-10 relative mt-2">
+            {index < trail.length - 1 ? (
+              <motion.a
+                href={`#${trail[index + 1].id}`}
+                whileHover={{ scale: 1.03, boxShadow: "0 0 20px rgba(255, 255, 255, 0.15)" }}
+                whileTap={{ scale: 0.98 }}
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-2.5 md:py-3 font-space text-xs sm:text-sm font-black text-black shadow-xl transition duration-300 w-full sm:w-auto hover:bg-orange-200"
+              >
+                Next Stage ({trail[index + 1].number})
+                <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-x-1" />
+              </motion.a>
+            ) : (
+              <motion.a
+                href={owner.mailHref}
+                whileHover={{ scale: 1.03, boxShadow: "0 0 20px rgba(34, 211, 238, 0.3)" }}
+                whileTap={{ scale: 0.98 }}
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-2.5 md:py-3 font-space text-xs sm:text-sm font-black text-black shadow-xl transition duration-300 w-full sm:w-auto hover:bg-cyan-200"
+              >
+                Email Forchun
+                <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-x-1" />
+              </motion.a>
+            )}
+            <motion.a
+              href={owner.phoneHref}
+              whileHover={{ scale: 1.03, backgroundColor: "rgba(255, 255, 255, 1)", color: "rgba(0, 0, 0, 1)" }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 md:py-3 font-space text-xs sm:text-sm font-black text-white transition duration-300 backdrop-blur-xl w-full sm:w-auto"
+            >
+              <PhoneCall className="h-4 w-4 sm:h-5 sm:w-5" />
+              Call Forchun
+            </motion.a>
+          </div>
+        </div>
       </div>
 
-      {index < trail.length - 1 && <SectionTransition theme={item.theme} index={index} />}
+      {index < trail.length - 1 && <SectionTransition theme={item.theme} index={index} isInView={isInView} />}
     </section>
   );
-}
+});
 
 function ScrollProgress() {
   const { scrollYProgress } = useScroll();
@@ -659,28 +712,14 @@ function ScrollProgress() {
   );
 }
 
-function MiniMap() {
-  const [active, setActive] = useState("start");
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((entry) => entry.isIntersecting && setActive(entry.target.id)),
-      { threshold: 0.3 }
-    );
-    const elements = trail.map((item) => document.getElementById(item.id)).filter(Boolean);
-    elements.forEach((el) => observer.observe(el));
-    return () => {
-      elements.forEach((el) => observer.unobserve(el));
-      observer.disconnect();
-    };
-  }, []);
-
+const MiniMap = React.memo(function MiniMap({ activeSection }) {
   return (
-    <div className="fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 rounded-[2rem] border border-white/8 bg-black/60 p-2.5 shadow-2xl backdrop-blur-2xl lg:block">
+    <div className="fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 rounded-[2rem] border border-white/8 bg-black/60 p-2.5 shadow-2xl backdrop-blur-2xl lg:block font-space">
       <div className="w-[1.5px] bg-gradient-to-b from-cyan-500/20 via-orange-500/20 to-blue-500/20 absolute left-[22.5px] top-4 bottom-4 z-0 pointer-events-none" />
 
       <div className="relative z-10 flex flex-col gap-2">
         {trail.map((item) => {
-          const isActive = active === item.id;
+          const isActive = activeSection === item.id;
           return (
             <a
               key={item.id}
@@ -701,7 +740,7 @@ function MiniMap() {
               )}
               {Number(item.number)}
 
-              <div className="absolute right-13 top-1/2 -translate-y-1/2 scale-0 group-hover:scale-100 transition-all duration-300 origin-right rounded-xl border border-white/10 bg-black/85 px-3.5 py-2 text-[9px] font-accent uppercase tracking-widest text-cyan-300 backdrop-blur-2xl whitespace-nowrap shadow-3xl pointer-events-none">
+              <div className="absolute right-14 top-1/2 -translate-y-1/2 scale-0 group-hover:scale-100 transition-all duration-300 origin-right rounded-xl border border-white/10 bg-black/85 px-3.5 py-2 text-[9px] font-space uppercase tracking-widest text-cyan-300 backdrop-blur-2xl whitespace-nowrap shadow-3xl pointer-events-none">
                 <span className="mr-1.5 opacity-40">{item.number}</span>
                 {item.world}
               </div>
@@ -711,9 +750,9 @@ function MiniMap() {
       </div>
     </div>
   );
-}
+});
 
-function Hero({ smoothX, smoothY }) {
+const Hero = React.memo(function Hero({ smoothX, smoothY, isInView }) {
   const x = useTransform(smoothX, [-600, 600], [-20, 20]);
   const y = useTransform(smoothY, [-400, 400], [-15, 15]);
   const rotateX = useTransform(smoothY, [-400, 400], [8, -8]);
@@ -725,173 +764,349 @@ function Hero({ smoothX, smoothY }) {
   const heroWorld = { theme: "from-cyan-300 via-blue-500 to-orange-400", visual: "clouds", creature: "whale" };
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-[#030712] text-white flex items-center">
-      <FloatingWorld item={heroWorld} index={0} smoothX={smoothX} smoothY={smoothY} />
+    <section 
+      id="top-section" 
+      className="relative h-screen min-h-screen w-full overflow-hidden bg-[#030712] text-white flex items-center snap-start"
+    >
+      <FloatingWorld item={heroWorld} index={0} smoothX={smoothX} smoothY={smoothY} isInView={isInView} />
 
-      <div className="pointer-events-none absolute inset-0 overflow-hidden z-0">
-        <motion.div
-          className="absolute left-[15%] top-0 h-[150%] w-[3px] origin-top rotate-12 bg-gradient-to-b from-cyan-400/40 via-blue-500/20 to-transparent blur-md"
-          animate={{ opacity: [0.3, 0.9, 0.3], scaleX: [1, 2.5, 1], x: [-30, 30, -30] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute right-[25%] top-0 h-[150%] w-[3px] origin-top -rotate-12 bg-gradient-to-b from-orange-400/35 via-amber-500/15 to-transparent blur-md"
-          animate={{ opacity: [0.2, 0.7, 0.2], scaleX: [1, 3, 1], x: [40, -40, 40] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        />
-        <motion.div
-          className="absolute left-[45%] top-0 h-[150%] w-[2px] origin-top rotate-[6deg] bg-gradient-to-b from-violet-400/30 via-purple-500/10 to-transparent blur-[3px]"
-          animate={{ opacity: [0.15, 0.6, 0.15], x: [-20, 20, -20] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2.5 }}
-        />
-        <motion.div
-          className="absolute right-[45%] top-0 h-[150%] w-[2px] origin-top -rotate-[6deg] bg-gradient-to-b from-emerald-400/20 via-teal-500/10 to-transparent blur-[3px]"
-          animate={{ opacity: [0.1, 0.5, 0.1], x: [20, -20, 20] }}
-          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 4 }}
-        />
-        <motion.div
-          className="absolute inset-x-0 bottom-0 h-80 bg-gradient-to-t from-cyan-500/10 via-blue-500/5 to-transparent blur-3xl"
-          animate={{ opacity: [0.4, 0.9, 0.4] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </div>
+      {isInView && (
+        <div className="pointer-events-none absolute inset-0 overflow-hidden z-0 opacity-40">
+          <motion.div
+            className="absolute left-[15%] top-0 h-[150%] w-[3px] origin-top rotate-12 bg-gradient-to-b from-cyan-400/40 via-blue-500/20 to-transparent blur-md"
+            animate={{ opacity: [0.3, 0.9, 0.3], scaleX: [1, 2.5, 1], x: [-30, 30, -30] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="absolute right-[25%] top-0 h-[150%] w-[3px] origin-top -rotate-12 bg-gradient-to-b from-orange-400/35 via-amber-500/15 to-transparent blur-md"
+            animate={{ opacity: [0.2, 0.7, 0.2], scaleX: [1, 3, 1], x: [40, -40, 40] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          />
+          <motion.div
+            className="absolute left-[45%] top-0 h-[150%] w-[2px] origin-top rotate-[6deg] bg-gradient-to-b from-violet-400/30 via-purple-500/10 to-transparent blur-[3px]"
+            animate={{ opacity: [0.15, 0.6, 0.15], x: [-20, 20, -20] }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2.5 }}
+          />
+          <motion.div
+            className="absolute right-[45%] top-0 h-[150%] w-[2px] origin-top -rotate-[6deg] bg-gradient-to-b from-emerald-400/20 via-teal-500/10 to-transparent blur-[3px]"
+            animate={{ opacity: [0.1, 0.5, 0.1], x: [20, -20, 20] }}
+            transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 4 }}
+          />
+          <motion.div
+            className="absolute inset-x-0 bottom-0 h-80 bg-gradient-to-t from-cyan-500/10 via-blue-500/5 to-transparent blur-3xl"
+            animate={{ opacity: [0.4, 0.9, 0.4] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
+      )}
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-32 flex flex-col items-center text-center">
-        <motion.div
-          style={{ x, y, rotateX, rotateY, transformStyle: "preserve-3d" }}
-          className="relative mb-12 cursor-pointer group"
-        >
-          <div className="absolute inset-0 rounded-[3.5rem] bg-cyan-400/20 blur-3xl scale-150 group-hover:scale-175 transition-all duration-500" />
+      {/* Main Hero Container - Vertically Centered with explicit navbar top padding */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pt-20 md:pt-24 pb-8 flex flex-col items-center text-center justify-start md:justify-center h-full">
+        <div className="my-auto w-full flex flex-col items-center">
           
+          {/* Animated Centered Mark */}
           <motion.div
-            style={{ rotate: outerRotate }}
-            className="absolute inset-[-15px] rounded-[3.8rem] border border-dashed border-cyan-400/20 group-hover:border-cyan-400/40 transition-colors"
-          />
-
-          <motion.div
-            style={{ rotate: innerRotate }}
-            className="absolute inset-[-25px] rounded-[4.5rem] border border-double border-white/5"
-          />
-
-          <motion.div
-            className="rounded-[3.2rem] border border-white/15 bg-white/[0.03] p-8 shadow-3xl backdrop-blur-3xl"
-            animate={{
-              boxShadow: [
-                "0 0 50px rgba(34,211,238,0.12)",
-                "0 0 100px rgba(34,211,238,0.28)",
-                "0 0 50px rgba(34,211,238,0.12)",
-              ],
-            }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            style={{ x, y, rotateX, rotateY, transformStyle: "preserve-3d" }}
+            className="relative mb-6 cursor-pointer group"
           >
-            <KorvynMark size="h-32 w-32" />
-          </motion.div>
-        </motion.div>
+            <div className="absolute inset-0 rounded-[3.5rem] bg-cyan-400/20 blur-3xl scale-150 group-hover:scale-175 transition-all duration-500" />
+            
+            <motion.div
+              style={{ rotate: outerRotate }}
+              className="absolute inset-[-15px] rounded-[3.8rem] border border-dashed border-cyan-400/20 group-hover:border-cyan-400/40 transition-colors"
+            />
 
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="mb-8 inline-flex items-center gap-3.5 rounded-full border border-orange-400/30 bg-orange-400/10 px-5.5 py-2 text-xs font-accent uppercase tracking-[0.3em] text-orange-200 backdrop-blur-xl"
-        >
-          <Sparkles className="h-4.5 w-4.5 text-orange-300" />
-          Korvyn Website Services
-        </motion.div>
+            <motion.div
+              style={{ rotate: innerRotate }}
+              className="absolute inset-[-25px] rounded-[4.5rem] border border-double border-white/5"
+            />
 
-        <motion.h1
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.35, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-[6.5rem] xl:text-[7.5rem] font-bold leading-[1.0] tracking-tight text-white"
-        >
-          Custom websites built around{" "}
-          <span className="bg-gradient-to-r from-cyan-300 via-blue-400 via-violet-400 to-orange-400 bg-clip-text text-transparent">
-            your business.
-          </span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.7 }}
-          className="mt-9 max-w-3xl text-base md:text-lg leading-relaxed text-white/60 font-medium"
-        >
-          Get a direct project contact who helps turn your business information into a clean, professional website with clear pricing, simple steps, and support after launch.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.65, duration: 0.7 }}
-          className="mt-12 grid w-full max-w-3xl gap-4 sm:grid-cols-3"
-        >
-          {[
-            ["Starter range", "$250–$450"],
-            ["Support", "2 weeks included"],
-            ["Contact", owner.phone],
-          ].map(([label, value]) => (
-            <div
-              key={label}
-              className="rounded-2xl border border-white/8 bg-white/[0.03] p-5.5 backdrop-blur-xl text-center hover:bg-white/[0.06] hover:border-white/15 transition duration-300 shadow-sm"
+            <motion.div
+              className="rounded-[3.2rem] border border-white/15 bg-white/[0.03] p-6 shadow-3xl backdrop-blur-3xl"
+              animate={{
+                boxShadow: [
+                  "0 0 50px rgba(34,211,238,0.12)",
+                  "0 0 80px rgba(34,211,238,0.22)",
+                  "0 0 50px rgba(34,211,238,0.12)",
+                ],
+              }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >
-              <p className="font-accent text-[9px] font-black uppercase tracking-[0.25em] text-white/40">{label}</p>
-              <p className="mt-2.5 font-space text-base font-black text-white">{value}</p>
-            </div>
-          ))}
-        </motion.div>
+              <KorvynMark size="h-20 w-20 md:h-24 md:w-24" />
+            </motion.div>
+          </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.7 }}
-          className="mt-12 flex flex-col items-center gap-4.5 sm:flex-row z-10"
-        >
-          <a
-            href="#start"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-orange-400 px-8 py-4 font-space text-sm font-black text-black shadow-2xl shadow-cyan-500/20 hover:opacity-90 transition duration-300 hover:scale-[1.03]"
+          {/* 1. Eyebrow Label */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="mb-4 inline-flex items-center gap-3.5 rounded-full border border-orange-400/30 bg-orange-400/10 px-5 py-1.5 text-xs font-space font-bold uppercase tracking-[0.25em] text-orange-200 backdrop-blur-xl"
           >
-            Start Stage 01
-            <ArrowRight className="h-5 w-5" />
-          </a>
-          <a
-            href={owner.mailHref}
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/12 bg-white/5 px-7 py-4 font-space text-sm font-bold text-white backdrop-blur-xl hover:bg-white hover:text-black transition duration-300 hover:scale-[1.03]"
+            <Sparkles className="h-4 w-4 text-orange-300 animate-pulse" />
+            Korvyn Website Services
+          </motion.div>
+
+          {/* 2. Massive Title */}
+          <motion.h1
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.05] tracking-tight text-white max-w-5xl"
           >
-            <Mail className="h-5 w-5" />
-            Email Forchun
-          </a>
-          <a
-            href={owner.phoneHref}
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/12 bg-white/5 px-7 py-4 font-space text-sm font-bold text-white backdrop-blur-xl hover:bg-white hover:text-black transition duration-300 hover:scale-[1.03]"
+            Custom websites built around{" "}
+            <span className="bg-gradient-to-r from-cyan-300 via-blue-400 via-violet-400 to-orange-400 bg-clip-text text-transparent">
+              your business.
+            </span>
+          </motion.h1>
+
+          {/* 3. Supporting Paragraph */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.7 }}
+            className="mt-6 max-w-3xl text-xs sm:text-sm md:text-base leading-relaxed text-white/60 font-medium font-space"
           >
-            <PhoneCall className="h-5 w-5" />
-            Call Forchun
-          </a>
-        </motion.div>
+            Get a direct project contact who helps turn your business information into a clean, professional website with clear pricing, simple steps, and support after launch.
+          </motion.p>
+
+          {/* 4. Supporting Visuals/Cards */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.65, duration: 0.7 }}
+            className="mt-8 grid w-full max-w-3xl gap-4 grid-cols-1 sm:grid-cols-3"
+          >
+            {[
+              ["Starter range", "$250–$450"],
+              ["Support", "2 weeks included"],
+              ["Contact", owner.phone],
+            ].map(([label, value]) => (
+              <div
+                key={label}
+                className="rounded-2xl border border-white/8 bg-white/[0.03] p-4 backdrop-blur-xl text-center hover:bg-white/[0.06] hover:border-white/15 transition duration-300 shadow-sm font-space"
+              >
+                <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/40">{label}</p>
+                <p className="mt-1 text-xs sm:text-sm md:text-base font-black text-white">{value}</p>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.7 }}
+            className="mt-8 flex flex-col items-center gap-3 sm:flex-row z-10 font-space"
+          >
+            <motion.a
+              href="#start"
+              whileHover={{ scale: 1.03, boxShadow: "0 0 25px rgba(34, 211, 238, 0.4)" }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-orange-400 px-8 py-3 font-space text-xs sm:text-sm font-black text-black shadow-2xl transition duration-300"
+            >
+              Start Stage 01
+              <ArrowRight className="h-5 w-5" />
+            </motion.a>
+            <motion.a
+              href={owner.mailHref}
+              whileHover={{ scale: 1.03, backgroundColor: "rgba(255, 255, 255, 1)", color: "rgba(0, 0, 0, 1)" }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/12 bg-white/5 px-6 py-3 font-space text-xs sm:text-sm font-bold text-white backdrop-blur-xl transition duration-300"
+            >
+              <Mail className="h-5 w-5" />
+              Email Forchun
+            </motion.a>
+            <motion.a
+              href={owner.phoneHref}
+              whileHover={{ scale: 1.03, backgroundColor: "rgba(255, 255, 255, 1)", color: "rgba(0, 0, 0, 1)" }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/12 bg-white/5 px-6 py-3 font-space text-xs sm:text-sm font-bold text-white backdrop-blur-xl transition duration-300"
+            >
+              <PhoneCall className="h-5 w-5" />
+              Call Forchun
+            </motion.a>
+          </motion.div>
+        </div>
       </div>
 
-      <SectionTransition theme={heroWorld.theme} index={0} />
+      <SectionTransition theme={heroWorld.theme} index={0} isInView={isInView} />
     </section>
   );
-}
+});
+
+const Footer = React.memo(function Footer({ smoothX, smoothY, isInView }) {
+  return (
+    <footer id="footer-section" className="relative h-screen min-h-screen w-full overflow-hidden bg-black text-center border-t border-white/5 flex items-center justify-center snap-start font-space">
+      <FloatingWorld
+        item={{ theme: "from-orange-300 via-cyan-300 to-blue-600", visual: "portal", creature: "whale" }}
+        index={14}
+        smoothX={smoothX}
+        smoothY={smoothY}
+        isInView={isInView}
+      />
+
+      <div className="font-display text-[15vw] font-bold leading-none tracking-tighter opacity-5 bg-gradient-to-b from-white to-transparent bg-clip-text text-transparent pointer-events-none absolute top-12 left-1/2 -translate-x-1/2 select-none">
+        KORVYN
+      </div>
+
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-6 md:px-12 lg:px-20 pt-20 md:pt-24 pb-8 flex flex-col items-center justify-start md:justify-center h-full">
+        <div className="my-auto w-full flex flex-col items-center">
+          <div className="rounded-[3rem] border border-white/10 bg-white/[0.02] p-6 md:p-10 shadow-3xl backdrop-blur-3xl w-full flex flex-col items-center">
+            <div className="flex justify-center">
+              <KorvynMark size="h-16 w-16" />
+            </div>
+            <h2 className="mt-4 font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white">Korvyn</h2>
+            <p className="mt-1.5 font-space text-[10px] sm:text-xs font-bold tracking-[0.25em] text-cyan-400 uppercase">Custom Website Services</p>
+            
+            <div className="mx-auto mt-6 max-w-md w-full text-left">
+              <div className="space-y-3 rounded-[2rem] border border-white/8 bg-black/40 p-5 md:p-6 backdrop-blur text-xs sm:text-sm text-white/70">
+                <div className="flex justify-between items-center">
+                  <span className="text-[9px] font-bold text-white/40 uppercase tracking-[0.2em]">Website Portal</span>
+                  <p className="font-bold text-white">korvyn.site</p>
+                </div>
+                <div className="border-t border-white/5 pt-2 flex justify-between items-center">
+                  <span className="text-[9px] font-bold text-white/40 uppercase tracking-[0.2em]">Project Manager</span>
+                  <p className="font-bold text-white">{owner.name}</p>
+                </div>
+                <div className="border-t border-white/5 pt-2 flex justify-between items-center">
+                  <span className="text-[9px] font-bold text-white/40 uppercase tracking-[0.2em]">Email Channel</span>
+                  <p className="font-bold text-white">{owner.email}</p>
+                </div>
+                <div className="border-t border-white/5 pt-2 flex justify-between items-center">
+                  <span className="text-[9px] font-bold text-white/40 uppercase tracking-[0.2em]">Direct Phone Line</span>
+                  <p className="font-bold text-white">{owner.phone}</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row w-full sm:w-auto">
+              <motion.a
+                href={owner.site}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.03, backgroundColor: "rgba(255, 255, 255, 1)", color: "rgba(0, 0, 0, 1)" }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/12 bg-white/5 px-6 py-2.5 font-space font-bold text-xs sm:text-sm text-white backdrop-blur-xl transition duration-300 w-full sm:w-auto"
+              >
+                Visit Website
+                <ExternalLink className="h-4 w-4" />
+              </motion.a>
+              <motion.a
+                href={owner.mailHref}
+                whileHover={{ scale: 1.03, boxShadow: "0 0 20px rgba(34, 211, 238, 0.3)" }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-2.5 font-space font-black text-xs sm:text-sm text-black shadow-2xl transition duration-300 hover:bg-cyan-200 w-full sm:w-auto"
+              >
+                Email Forchun
+                <Mail className="h-4 w-4" />
+              </motion.a>
+              <motion.a
+                href={owner.phoneHref}
+                whileHover={{ scale: 1.03, backgroundColor: "rgba(255, 255, 255, 1)", color: "rgba(0, 0, 0, 1)" }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/12 bg-white/5 px-6 py-2.5 font-space font-bold text-xs sm:text-sm text-white backdrop-blur-xl transition duration-300 w-full sm:w-auto"
+              >
+                Call Forchun
+                <PhoneCall className="h-4 w-4" />
+              </motion.a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+});
 
 export default function KorvynCandyTrailWebsite() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("start");
   const nav = useMemo(() => trail, []);
   const { smoothX, smoothY } = useMouseParallax();
 
+  useEffect(() => {
+    const container = document.querySelector(".scroll-container");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      {
+        root: container,
+        threshold: 0.2,
+        rootMargin: "-25% 0px -25% 0px"
+      }
+    );
+    
+    const heroEl = document.getElementById("top-section");
+    if (heroEl) observer.observe(heroEl);
+    
+    const elements = trail.map((item) => document.getElementById(item.id)).filter(Boolean);
+    elements.forEach((el) => observer.observe(el));
+    
+    const footerEl = document.getElementById("footer-section");
+    if (footerEl) observer.observe(footerEl);
+
+    return () => {
+      if (heroEl) observer.unobserve(heroEl);
+      elements.forEach((el) => observer.unobserve(el));
+      if (footerEl) observer.unobserve(footerEl);
+      observer.disconnect();
+    };
+  }, []);
+
+  const getIsInView = (id, index) => {
+    if (activeSection === id) return true;
+    if (activeSection === "top-section" && id === "start") return true;
+    if (activeSection === "footer-section" && id === "next-step") return true;
+    
+    const activeIndex = trail.findIndex((t) => t.id === activeSection);
+    if (activeIndex !== -1) {
+      return Math.abs(activeIndex - index) <= 1;
+    }
+    return false;
+  };
+
   return (
-    <main className="w-full min-h-screen overflow-x-hidden bg-[#030712] text-white selection:bg-orange-400 selection:text-black">
+    <main className="scroll-container w-full bg-[#030712] text-white selection:bg-orange-400 selection:text-black font-space">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800;900&family=Orbitron:wght@500;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700;800;900&display=swap');
         
         *, *::before, *::after { box-sizing: border-box; }
-        html { scroll-behavior: smooth; overflow-x: hidden; }
-        body { background: #030712; overflow-x: hidden; margin: 0; padding: 0; }
+        html, body { 
+          height: 100%;
+          margin: 0; 
+          padding: 0; 
+          overflow: hidden;
+          background: #030712;
+        }
+        .scroll-container {
+          height: 100vh;
+          height: 100dvh;
+          width: 100%;
+          overflow-y: auto;
+          scroll-snap-type: y mandatory;
+          scroll-behavior: smooth;
+          -webkit-overflow-scrolling: touch;
+        }
         main { font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif; }
+        section, footer {
+          height: 100vh;
+          height: 100dvh;
+          min-height: 100vh;
+          min-height: 100dvh;
+          scroll-snap-align: start;
+          scroll-snap-stop: always;
+          flex-shrink: 0;
+          position: relative;
+          overflow: hidden;
+        }
         .font-display { font-family: 'Space Grotesk', 'Manrope', ui-sans-serif, system-ui, sans-serif; }
         .font-space { font-family: 'Space Grotesk', sans-serif; }
-        .font-accent { font-family: 'Orbitron', sans-serif; }
+        .font-accent { font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 0.25em; }
       `}</style>
 
       <ScrollProgress />
@@ -902,23 +1117,27 @@ export default function KorvynCandyTrailWebsite() {
             <KorvynMark size="h-12 w-12" />
             <div className="text-left">
               <p className="font-display text-base font-bold tracking-[0.25em] text-white group-hover:text-cyan-300 transition-colors">KORVYN</p>
-              <p className="text-[9px] font-accent font-bold text-cyan-400/80 tracking-widest uppercase">Website Services</p>
+              <p className="text-[9px] font-space font-bold text-cyan-400/80 tracking-widest uppercase">Website Services</p>
             </div>
           </a>
 
-          <div className="hidden items-center gap-3.5 lg:flex">
-            <a
+          <div className="hidden items-center gap-3 lg:flex">
+            <motion.a
               href={owner.phoneHref}
-              className="rounded-full border border-white/12 bg-white/5 px-6 py-2.5 font-space text-xs font-bold text-white/80 backdrop-blur-xl transition hover:bg-white hover:text-black"
+              whileHover={{ scale: 1.03, backgroundColor: "rgba(255,255,255,0.15)", borderColor: "rgba(255,255,255,0.3)" }}
+              whileTap={{ scale: 0.97 }}
+              className="rounded-full border border-white/12 bg-white/5 px-6 py-2.5 font-space text-xs font-bold text-white/80 backdrop-blur-xl transition duration-300"
             >
               Call Forchun
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href={owner.mailHref}
-              className="rounded-full bg-white px-6 py-2.5 font-space text-xs font-black text-black shadow-lg transition hover:bg-cyan-200"
+              whileHover={{ scale: 1.03, backgroundColor: "rgb(204, 251, 241)", boxShadow: "0 0 15px rgba(34, 211, 238, 0.3)" }}
+              whileTap={{ scale: 0.97 }}
+              className="rounded-full bg-white px-6 py-2.5 font-space text-xs font-black text-black shadow-lg transition duration-300"
             >
               Email Forchun
-            </a>
+            </motion.a>
           </div>
 
           <button
@@ -931,20 +1150,20 @@ export default function KorvynCandyTrailWebsite() {
         </div>
 
         {menuOpen && (
-          <div className="max-h-[80vh] overflow-auto border-t border-white/5 bg-black/95 px-6 py-6 lg:hidden text-left shadow-2xl">
-            <div className="grid gap-1.5">
+          <div className="max-h-[80vh] overflow-auto border-t border-white/5 bg-black/95 px-6 py-6 lg:hidden text-left shadow-2xl font-space">
+            <div className="grid gap-1">
               {nav.map((item) => (
                 <a
                   key={item.id}
                   href={`#${item.id}`}
                   onClick={() => setMenuOpen(false)}
-                  className="flex items-center justify-between rounded-2xl px-4.5 py-3.5 font-space text-sm text-white/80 hover:bg-white/5 transition"
+                  className="flex items-center justify-between rounded-2xl px-4 py-3 text-sm text-white/80 hover:bg-white/5 transition"
                 >
                   <span>
                     <span className="mr-3 font-black text-cyan-400">{item.number}</span>
                     {item.eyebrow}
                   </span>
-                  <span className="text-[10px] text-white/30 uppercase tracking-widest font-accent">{item.world}</span>
+                  <span className="text-[10px] text-white/30 uppercase tracking-widest font-space">{item.world}</span>
                 </a>
               ))}
             </div>
@@ -968,81 +1187,23 @@ export default function KorvynCandyTrailWebsite() {
         )}
       </nav>
 
-      <MiniMap />
+      <MiniMap activeSection={activeSection} />
       <div id="top" />
-      <Hero smoothX={smoothX} smoothY={smoothY} />
+      
+      <Hero smoothX={smoothX} smoothY={smoothY} isInView={activeSection === "top-section" || activeSection === "start"} />
 
       {trail.map((item, index) => (
-        <TrailNode key={item.id} item={item} index={index} smoothX={smoothX} smoothY={smoothY} />
+        <TrailNode 
+          key={item.id} 
+          item={item} 
+          index={index} 
+          smoothX={smoothX} 
+          smoothY={smoothY} 
+          isInView={getIsInView(item.id, index)}
+        />
       ))}
 
-      <footer className="relative w-full overflow-hidden bg-black px-6 py-28 text-center md:px-12 border-t border-white/5">
-        <FloatingWorld
-          item={{ theme: "from-orange-300 via-cyan-300 to-blue-600", visual: "portal", creature: "whale" }}
-          index={14}
-          smoothX={smoothX}
-          smoothY={smoothY}
-        />
-
-        <div className="font-display text-[15vw] font-bold leading-none tracking-tighter opacity-5 bg-gradient-to-b from-white to-transparent bg-clip-text text-transparent pointer-events-none absolute top-12 left-1/2 -translate-x-1/2 select-none">
-          KORVYN
-        </div>
-
-        <div className="relative z-10 mx-auto max-w-4xl rounded-[3rem] border border-white/10 bg-white/[0.02] p-8 shadow-3xl backdrop-blur-3xl md:p-16">
-          <div className="flex justify-center">
-            <KorvynMark size="h-24 w-24" />
-          </div>
-          <h2 className="mt-8 font-display text-5xl font-bold tracking-tight text-white md:text-7xl">Korvyn</h2>
-          <p className="mt-3 font-accent text-xs tracking-[0.3em] text-cyan-400 uppercase">Custom Website Services</p>
-          
-          <div className="mx-auto mt-10 max-w-md text-left">
-            <div className="space-y-4 rounded-3rem border border-white/8 bg-black/40 p-7 backdrop-blur text-sm text-white/70">
-              <div>
-                <span className="font-accent text-[9px] font-black text-white/40 uppercase tracking-widest">Website Portal</span>
-                <p className="text-base font-bold text-white mt-1">korvyn.site</p>
-              </div>
-              <div className="border-t border-white/5 pt-3">
-                <span className="font-accent text-[9px] font-black text-white/40 uppercase tracking-widest">Project Manager</span>
-                <p className="text-base font-bold text-white mt-1">{owner.name}</p>
-              </div>
-              <div className="border-t border-white/5 pt-3">
-                <span className="font-accent text-[9px] font-black text-white/40 uppercase tracking-widest">Email Channel</span>
-                <p className="text-base font-bold text-white mt-1">{owner.email}</p>
-              </div>
-              <div className="border-t border-white/5 pt-3">
-                <span className="font-accent text-[9px] font-black text-white/40 uppercase tracking-widest">Direct Phone Line</span>
-                <p className="text-base font-bold text-white mt-1">{owner.phone}</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="mt-12 flex flex-col items-center justify-center gap-4.5 sm:flex-row">
-            <a
-              href={owner.site}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/12 bg-white/5 px-8 py-4 font-space font-bold text-white backdrop-blur-xl hover:bg-white hover:text-black transition duration-300 hover:scale-[1.03]"
-            >
-              Visit Website
-              <ExternalLink className="h-5 w-5" />
-            </a>
-            <a
-              href={owner.mailHref}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 font-space font-black text-black shadow-2xl transition hover:bg-cyan-200 duration-300 hover:scale-[1.03]"
-            >
-              Email Forchun
-              <Mail className="h-5 w-5" />
-            </a>
-            <a
-              href={owner.phoneHref}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/12 bg-white/5 px-8 py-4 font-space font-bold text-white backdrop-blur-xl hover:bg-white hover:text-black transition duration-300 hover:scale-[1.03]"
-            >
-              Call Forchun
-              <PhoneCall className="h-5 w-5" />
-            </a>
-          </div>
-        </div>
-      </footer>
+      <Footer smoothX={smoothX} smoothY={smoothY} isInView={activeSection === "footer-section" || activeSection === "next-step"} />
     </main>
   );
 }
