@@ -995,17 +995,17 @@ const Hero = React.memo(function Hero({ smoothX, smoothY, isInView }) {
               whileTap={{ scale: 0.98 }}
               className="inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 px-9 py-3.5 font-space text-sm sm:text-base font-black text-black shadow-2xl transition duration-300"
             >
-              Tell Me About Your Business
+              Start My Free Preview
               <ArrowRight className="h-5 w-5" />
             </motion.a>
             {/* Secondary */}
             <motion.a
-              href="#what-i-build"
+              href="#why-different"
               whileHover={{ scale: 1.03, backgroundColor: "rgba(255, 255, 255, 0.10)", borderColor: "rgba(255,255,255,0.3)" }}
               whileTap={{ scale: 0.98 }}
               className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-transparent px-7 py-3.5 font-space text-sm font-bold text-white/80 backdrop-blur-xl transition duration-300"
             >
-              View Recent Projects
+              See How It Works
               <ArrowRight className="h-5 w-5" />
             </motion.a>
           </motion.div>
