@@ -31,110 +31,102 @@ const owner = {
 
 const trail = [
   {
-    id: "start",
+    id: "why-different",
     number: "01",
-    world: "Sky Gate",
-    eyebrow: "Start here",
-    title: "A professional website helps customers trust you before they call.",
-    body: "Work with a direct project contact to turn your business details into a clean, modern website with clear pricing and a simple build process.",
-    icon: BriefcaseBusiness,
-    theme: "from-sky-300 via-cyan-300 to-blue-700",
-    bg: "from-slate-950 via-blue-950 to-sky-950",
+    world: "How It Works",
+    eyebrow: "Why Korvyn is different",
+    title: "Most web designers ask for payment before showing you anything.",
+    body: "I do things differently.",
+    icon: WandSparkles,
+    theme: "from-cyan-300 via-blue-500 to-violet-500",
+    bg: "from-slate-950 via-blue-950 to-cyan-950",
     visual: "clouds",
     creature: "whale",
-    points: ["Clean professional design", "Built around your business", "Simple launch process", "Easy call and email actions", "Clear next step", "Support after launch"],
+    steps: [
+      { number: "1", text: "Tell me about your business." },
+      { number: "2", text: "I build a custom website based on your goals." },
+      { number: "3", text: "Review it and decide if you'd like to move forward.", note: "Additional pages, features, integrations, and custom functionality can be added after approval." },
+    ],
+    pills: ["No pressure.", "No upfront payment.", "No risk."],
+    points: [],
   },
   {
-    id: "custom",
+    id: "what-i-build",
     number: "02",
-    world: "Violet Orbit",
-    eyebrow: "Custom fit",
-    title: "Your website should match your business, not a random template.",
-    body: "Your project contact learns what you need, then shapes the right website structure for your services, menu, hours, location, contact details, or internal tools.",
-    icon: Rocket,
+    world: "Services",
+    eyebrow: "What I build",
+    title: "Custom Websites And Business Software Built Around Your Business.",
+    body: "",
+    icon: Code2,
     theme: "from-violet-300 via-fuchsia-400 to-indigo-700",
     bg: "from-indigo-950 via-purple-950 to-slate-950",
     visual: "orbits",
     creature: "fish",
-    points: ["Mobile friendly", "Easy to understand", "Clean sections", "Simple to launch", "Custom business structure", "Clear customer journey"],
+    points: [
+      "Business Websites",
+      "Restaurant Websites",
+      "Contractor Websites",
+      "Service Business Websites",
+      "Appointment Booking Systems",
+      "Inventory Tracking Systems",
+      "Employee Management Systems",
+      "Internal Dashboards",
+      "Custom Software Solutions",
+    ],
   },
   {
-    id: "different",
+    id: "more-than-websites",
     number: "03",
-    world: "Neon Forest",
-    eyebrow: "What makes Korvyn different",
-    title: "No confusing packages. No copy-and-paste website feel.",
-    body: "The process stays personal, affordable, and easy to understand, so your website feels specific to your business instead of recycled from someone else.",
-    icon: WandSparkles,
+    world: "Beyond Websites",
+    eyebrow: "More than just websites",
+    title: "Many Businesses Need More Than A Website.",
+    body: "They need systems that save time, reduce mistakes, and simplify daily operations.",
+    icon: BriefcaseBusiness,
     theme: "from-emerald-300 via-lime-300 to-cyan-400",
     bg: "from-emerald-950 via-green-950 to-slate-950",
     visual: "leaves",
     creature: "sparkles",
-    points: ["No confusing packages", "No unnecessary features", "No complicated tech talk", "Custom designs", "Direct project contact"],
+    points: [
+      "Inventory Management Systems",
+      "Employee Tracking Systems",
+      "Booking Platforms",
+      "Customer Management Tools",
+      "Internal Dashboards",
+      "Business Automation Tools",
+      "Custom Software Solutions",
+    ],
+    suffix: "If you can describe it, I can probably build it.",
+    suffixCta: "Need something custom? Let\u2019s talk.",
   },
   {
-    id: "why-us",
+    id: "about",
     number: "04",
-    world: "Decision Bridge",
-    eyebrow: "Why choose Korvyn",
-    title: "Your website should make it easier for people to choose you.",
-    body: "The goal is not just a good-looking page. The goal is to make your offer clear, reduce doubt, and help customers know exactly how to contact you.",
+    world: "About Forchun",
+    eyebrow: "About Forchun",
+    title: "Work Directly With The Developer Building Your Project.",
+    body: "I\u2019ve been building websites and softwares for eight years.",
     icon: ShieldCheck,
     theme: "from-rose-300 via-orange-400 to-yellow-300",
     bg: "from-rose-950 via-orange-950 to-slate-950",
     visual: "wheels",
     creature: "sparkles",
-    points: ["Clear offer on the page", "Strong first impression", "Simple contact buttons", "Mobile-friendly layout", "Pricing confirmed before work starts", "Direct project contact", "Support after launch", "Less guesswork for your customers"],
-  },
-  {
-    id: "customer-path",
-    number: "05",
-    world: "Customer Path",
-    eyebrow: "How the website helps sell",
-    title: "Your website should guide visitors from interest to action.",
-    body: "A strong website does not leave people guessing. It shows what you offer, why it matters, why they can trust you, and how to reach you next.",
-    icon: ArrowRight,
-    theme: "from-blue-300 via-cyan-300 to-emerald-400",
-    bg: "from-blue-950 via-cyan-950 to-slate-950",
-    visual: "orbits",
-    creature: "fish",
-    points: ["Clear headline", "Easy service explanation", "Trust-building layout", "Visible call and email buttons", "Mobile-first sections", "Simple path from interest to contact"],
-  },
-  {
-    id: "builds",
-    number: "06",
-    world: "Code Lab",
-    eyebrow: "What Korvyn builds",
-    title: "Websites, forms, dashboards, menus, trackers, and tools.",
-    body: "Korvyn provides custom websites and simple digital tools based on what your business needs most, from public pages to practical business systems.",
-    icon: Code2,
-    theme: "from-cyan-300 via-blue-500 to-violet-500",
-    bg: "from-slate-950 via-cyan-950 to-indigo-950",
-    visual: "code",
-    creature: "sparkles",
-    points: ["Restaurant websites", "Service websites", "Portfolio websites", "Menu websites", "Contact forms", "Dashboards", "Inventory trackers", "Sign-in systems", "Internal business tools"],
-  },
-  {
-    id: "benefits",
-    number: "07",
-    world: "Trust Valley",
-    eyebrow: "Business benefits",
-    title: "A clear website helps customers understand your business faster.",
-    body: "Customers often check online before they call, visit, or choose a business. A clear website helps you look active, reliable, and easy to work with.",
-    icon: ShieldCheck,
-    theme: "from-amber-300 via-orange-400 to-rose-500",
-    bg: "from-orange-950 via-amber-950 to-stone-950",
-    visual: "wheels",
-    creature: "sparkles",
-    points: ["Better first impression", "Build customer trust", "Make your services easier to understand", "Give customers a faster way to contact you", "Show hours, location, services, and details", "Make your business look active online"],
+    points: [
+      "No outsourcing.",
+      "No middlemen.",
+      "No sales team.",
+      "No templates copied from somewhere else.",
+      "Direct communication throughout the project.",
+      "Custom work built around your business.",
+      "Built by the person you talk to.",
+    ],
   },
   {
     id: "pricing",
-    number: "08",
-    world: "Pricing Portal",
+    number: "05",
+    world: "Pricing",
     eyebrow: "Pricing",
-    title: "Starter websites range from $250–$450. Larger builds can grow from there.",
-    body: "Your price is discussed clearly and confirmed before work begins, so you know what is included before the project starts.",
+    title: "Transparent Pricing With No Upfront Payment Required.",
+    body: "Review before you decide.",
     icon: BadgeDollarSign,
     theme: "from-yellow-300 via-orange-400 to-cyan-300",
     bg: "from-yellow-950 via-orange-950 to-slate-950",
@@ -142,75 +134,37 @@ const trail = [
     creature: "sparkles",
     priceCards: [
       {
-        name: "Starter Website",
-        price: "$250–$450",
-        text: "For a simple, professional website built around your basic business needs.",
-        list: ["Custom website design", "Mobile-friendly layout", "Business information", "Services or menu section", "Phone and email section", "Business hours", "Social links", "Basic launch support"],
+        name: "No Upfront Payment",
+        price: "Website Built First",
+        text: "See your custom website before spending anything.",
+        list: ["Custom website built first", "Review before deciding", "No payment required", "No obligation"],
       },
       {
-        name: "Larger Custom Project",
-        price: "$800–$1,700+",
-        text: "For advanced layouts, dashboards, forms, booking buttons, trackers, or custom business tools built around your workflow.",
-        list: ["Advanced layouts", "Customer forms", "Booking buttons", "Inventory systems", "Sign-in systems", "Dashboards", "Custom business tools"],
+        name: "Starter Websites",
+        price: "Starting At $450",
+        text: "Professional design built around your business.",
+        list: [
+          "Professional Design",
+          "Mobile Friendly",
+          "Contact Forms",
+          "Business Information Pages",
+          "Launch Support Included",
+        ],
+      },
+      {
+        name: "Advanced Projects",
+        price: "Custom Quote",
+        text: "For complex systems and custom software solutions.",
+        list: [
+          "Inventory Systems",
+          "Business Dashboards",
+          "Booking Platforms",
+          "Business Automation",
+          "Custom Software",
+        ],
       },
     ],
     points: [],
-  },
-  {
-    id: "support",
-    number: "09",
-    world: "Repair Garden",
-    eyebrow: "Support",
-    title: "Two weeks of post-launch support are included.",
-    body: "After launch, you get support for small fixes, mobile display issues, contact form testing, text updates, image corrections, and basic website guidance.",
-    icon: CheckCircle2,
-    theme: "from-lime-300 via-emerald-400 to-cyan-400",
-    bg: "from-lime-950 via-emerald-950 to-slate-950",
-    visual: "leaves",
-    creature: "sparkles",
-    points: ["Bug fixes", "Display fixes", "Contact form testing", "Small corrections", "Website checkups", "Help understanding the completed website"],
-  },
-  {
-    id: "process",
-    number: "10",
-    world: "Launch Mountain",
-    eyebrow: "How it works",
-    title: "The project moves step by step before launch.",
-    body: "Your project contact prepares a preview or idea for your website, you review it, changes are discussed, the price is confirmed, the website is built, and the completed project is launched or handed off.",
-    icon: Rocket,
-    theme: "from-cyan-300 via-sky-400 to-blue-700",
-    bg: "from-sky-950 via-cyan-950 to-blue-950",
-    visual: "stars",
-    creature: "rocket",
-    points: ["Preview sent", "You review the idea", "Changes discussed", "Price confirmed", "Work begins", "Website launched", "Two weeks of support included"],
-  },
-  {
-    id: "ready",
-    number: "11",
-    world: "Project Checklist",
-    eyebrow: "What helps start faster",
-    title: "A few details help Korvyn shape the website around you.",
-    body: "You can start with basic information. Your project contact will organize it into a clear website structure that fits your business.",
-    icon: CheckCircle2,
-    theme: "from-teal-300 via-cyan-400 to-blue-500",
-    bg: "from-teal-950 via-cyan-950 to-slate-950",
-    visual: "code",
-    creature: "fish",
-    points: ["Your business name", "Your services or menu", "Your phone and email", "Your hours and location", "Photos or logo if available", "Design ideas or examples"],
-  },
-  {
-    id: "next-step",
-    number: "12",
-    world: "Final Portal",
-    eyebrow: "Next steps",
-    title: "Start the conversation with Korvyn.",
-    body: "Discuss your website ideas, business needs, design direction, pricing, timeline, and final project details with your direct project contact. Forchun can guide the conversation and help move the project forward.",
-    icon: Globe2,
-    theme: "from-orange-300 via-cyan-300 to-blue-600",
-    bg: "from-cyan-950 via-blue-950 to-orange-950",
-    visual: "portal",
-    creature: "whale",
-    points: ["Discuss your website ideas", "Discuss your business needs", "Discuss pricing", "Discuss timeline", "Confirm final project details", "Project contact: Forchun"],
   },
 ];
 
@@ -382,7 +336,7 @@ const WorldPieces = React.memo(function WorldPieces({ type, theme, index, isInVi
         return (
           <motion.span
             key={`${type}-${index}-${i}`}
-            className={`absolute border border-white/5 bg-gradient-to-br ${theme} ${shape} opacity-10 backdrop-blur-sm`}
+            className={`absolute border border-white/5 bg-gradient-to-br ${theme} ${shape} opacity-10`}
             style={{
               left: `${left}%`,
               top: `${top}%`,
@@ -476,7 +430,7 @@ const SectionTransition = React.memo(function SectionTransition({ theme, flip = 
         {Array.from({ length: 5 }).map((_, i) => (
           <motion.div
             key={`trans-cloud-${i}`}
-            className="absolute bottom-1 rounded-full bg-white/[0.02] backdrop-blur-md"
+            className="absolute bottom-1 rounded-full bg-white/[0.02]"
             style={{
               left: `${10 + i * 20}%`,
               width: `${80 + (i % 3) * 30}px`,
@@ -533,76 +487,138 @@ const TrailConnector = React.memo(function TrailConnector({ theme }) {
 const PricingCards = React.memo(function PricingCards({ item }) {
   if (!item.priceCards) return null;
   return (
-    <div className="mt-4 grid max-w-5xl gap-4 md:grid-cols-2 text-left mx-auto w-full z-10 relative items-stretch">
-      {item.priceCards.map((card, index) => (
-        <motion.div
-          key={card.name}
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: index * 0.1, duration: 0.5 }}
-          className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-b from-white/[0.08] to-white/[0.01] p-[1px] hover:border-white/20 transition-all duration-300 shadow-xl hover:scale-[1.01] group flex flex-col"
-        >
-          <div className={`absolute -right-16 -top-16 h-32 w-32 rounded-full bg-gradient-to-br ${item.theme} opacity-10 blur-2xl group-hover:opacity-15 transition-opacity duration-300`} />
-
-          <div className="relative rounded-[1.95rem] bg-black/60 p-4 sm:p-5 backdrop-blur-2xl flex flex-col justify-between flex-grow h-full">
-            <div className="flex flex-col h-full justify-between gap-4 font-space">
-              {/* Header section with aligned height */}
-              <div className="flex flex-col gap-1 md:min-h-[56px] justify-center">
-                <p className="text-[10px] font-black uppercase tracking-[0.15em] text-orange-300">{card.name}</p>
-                <h3 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-white">{card.price}</h3>
+    <div className="mt-3 grid max-w-5xl gap-4 md:grid-cols-3 text-left mx-auto w-full z-10 relative items-stretch">
+      {item.priceCards.map((card, cardIndex) => {
+        const isStarter = card.name === "Starter Websites";
+        return (
+          <motion.div
+            key={card.name}
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: cardIndex * 0.1, duration: 0.5 }}
+            className={`relative overflow-hidden rounded-[2rem] p-[1px] transition-all duration-300 shadow-xl hover:scale-[1.01] group flex flex-col ${
+              isStarter
+                ? "border-2 border-cyan-400/40 bg-gradient-to-b from-cyan-400/20 to-cyan-400/5 hover:border-cyan-400/60"
+                : "border border-white/10 bg-gradient-to-b from-white/[0.08] to-white/[0.01] hover:border-white/20"
+            }`}
+          >
+            {isStarter && (
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+                <span className="inline-block rounded-full bg-cyan-400 px-4 py-1 text-[10px] font-black text-black uppercase tracking-widest shadow-lg">
+                  Most Popular
+                </span>
               </div>
-              
-              {/* Description section with aligned height */}
-              <div className="md:min-h-[48px] flex items-center">
-                <p className="text-[11px] sm:text-xs leading-relaxed text-white/60">{card.text}</p>
+            )}
+
+            <div className={`absolute -right-16 -top-16 h-32 w-32 rounded-full bg-gradient-to-br ${item.theme} opacity-10 blur-2xl group-hover:opacity-15 transition-opacity duration-300`} />
+
+            <div className="relative rounded-[1.95rem] bg-black/60 p-5 sm:p-6 backdrop-blur-2xl flex flex-col flex-grow h-full">
+              <div className="flex flex-col gap-1 mb-3">
+                <p className="text-[10px] font-black uppercase tracking-[0.18em] text-orange-300">{card.name}</p>
+                <h3 className={`font-display font-extrabold tracking-tight ${
+                  isStarter ? "text-2xl sm:text-3xl text-cyan-300" : "text-xl sm:text-2xl text-white"
+                }`}>{card.price}</h3>
               </div>
 
-              {/* Feature grid with exactly 4 rows (2 columns) */}
-              <div className="grid grid-cols-2 gap-1.5 mt-auto">
+              <p className="text-xs leading-relaxed text-white/55 mb-4">{card.text}</p>
+
+              <div className="grid grid-cols-1 gap-1.5 mt-auto">
                 {card.list.map((point) => (
                   <div
                     key={point}
-                    className="flex items-center gap-2 rounded-xl border border-white/5 bg-white/[0.02] px-2.5 py-1.5 hover:bg-white/[0.05] hover:border-white/10 transition duration-300 w-full"
+                    className="flex items-center gap-2.5 rounded-xl border border-white/5 bg-white/[0.02] px-3 py-2 hover:bg-white/[0.05] transition duration-300 w-full"
                   >
                     <span className={`h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br ${item.theme} shadow-sm`} />
-                    <span className="text-[10px] sm:text-[11px] font-semibold text-white/80 whitespace-nowrap overflow-hidden text-ellipsis">{point}</span>
+                    <span className="text-xs font-semibold text-white/85">{point}</span>
                   </div>
                 ))}
               </div>
             </div>
-          </div>
-        </motion.div>
-      ))}
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+});
+
+const StepsDisplay = React.memo(function StepsDisplay({ steps, pills, theme }) {
+  if (!steps) return null;
+  return (
+    <div className="w-full max-w-3xl mx-auto z-10 relative mt-2 mb-5">
+      {/* Process timeline */}
+      <div className="relative">
+        {/* Connector line (desktop only) */}
+        <div className="hidden sm:block absolute top-[28px] left-[calc(16.67%+20px)] right-[calc(16.67%+20px)] h-[2px] bg-gradient-to-r from-white/10 via-white/20 to-white/10 z-0" />
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 relative z-10">
+          {steps.map((step, i) => (
+            <motion.div
+              key={step.number}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.12, duration: 0.55 }}
+              className="flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] p-5 pt-6 backdrop-blur-xl text-center hover:bg-white/[0.07] hover:border-white/20 transition duration-300 shadow-sm"
+            >
+              <span className={`h-11 w-11 flex items-center justify-center rounded-full bg-gradient-to-br ${theme} text-black font-black text-base font-space shadow-lg ring-4 ring-black/40`}>
+                {step.number}
+              </span>
+              <p className="text-sm sm:text-[15px] font-semibold leading-snug text-white/90 font-space">{step.text}</p>
+              {step.note && (
+                <p className="text-[11px] leading-snug text-white/40 font-space font-medium">{step.note}</p>
+              )}
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {pills && (
+        <div className="flex flex-wrap items-center justify-center gap-2.5">
+          {pills.map((pill, i) => (
+            <motion.span
+              key={pill}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.36 + i * 0.08, duration: 0.4 }}
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm font-bold text-white/80 font-space backdrop-blur-xl"
+            >
+              <span className={`h-1.5 w-1.5 rounded-full bg-gradient-to-br ${theme} shadow-sm`} />
+              {pill}
+            </motion.span>
+          ))}
+        </div>
+      )}
     </div>
   );
 });
 
 const TrailNode = React.memo(function TrailNode({ item, index, smoothX, smoothY, isInView }) {
   const isPricing = item.id === "pricing";
+  const isAbout = item.id === "about";
+  const hasSteps = !!item.steps;
 
   return (
     <section 
       id={item.id} 
-      className="relative h-screen min-h-screen w-full overflow-hidden bg-[#030712] text-white flex items-center snap-start"
+      className="relative min-h-screen py-24 md:py-0 md:h-screen md:min-h-screen w-full overflow-visible md:overflow-hidden bg-[#030712] text-white flex items-center snap-start"
     >
       <div className={`absolute inset-0 bg-gradient-to-br ${item.bg}`} />
       
-      {/* Full-width environmental layer */}
       <FloatingWorld item={item} index={index} smoothX={smoothX} smoothY={smoothY} isInView={isInView} />
       <SectionTransition theme={item.theme} flip index={index} isInView={isInView} />
       {index < trail.length - 1 && <TrailConnector theme={item.theme} />}
 
-      {/* Medium-width content container - centered vertically and horizontally with explicit navbar top padding */}
       <div className="relative z-10 w-full max-w-4xl mx-auto px-6 md:px-12 lg:px-20 pt-20 md:pt-24 pb-8 flex flex-col items-center justify-start md:justify-center h-full text-center">
         <div className="my-auto w-full flex flex-col items-center">
-          {/* 1. Eyebrow Label with Stage Badge integrated dynamically */}
+          {/* Eyebrow */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="mb-3 flex flex-wrap items-center justify-center gap-3 font-space text-[10px] sm:text-xs font-bold tracking-[0.25em] text-cyan-300 uppercase"
+            className="mb-4 flex flex-wrap items-center justify-center gap-3 font-space text-[10px] sm:text-xs font-bold tracking-[0.25em] text-cyan-300 uppercase"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 shadow-md shadow-cyan-400 animate-pulse" />
             {item.eyebrow}
@@ -610,89 +626,146 @@ const TrailNode = React.memo(function TrailNode({ item, index, smoothX, smoothY,
             <span className="text-orange-400">STAGE {item.number} // {item.world}</span>
           </motion.div>
 
-          {/* 2. Giant Title - Conditionally smaller font sizes for the pricing slide so it never overflows */}
+          {/* Title */}
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1, duration: 0.7 }}
-            className={`font-display font-bold leading-[1.15] tracking-tight text-white mb-3 max-w-4xl mx-auto ${
+            className={`font-display font-extrabold leading-[1.15] tracking-tight text-white mb-5 max-w-3xl mx-auto ${
               isPricing 
-                ? "text-xl sm:text-2xl md:text-3xl lg:text-[2.2rem]" 
-                : "text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
+                ? "text-xl sm:text-2xl md:text-3xl lg:text-[2rem]" 
+                : "text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[2.75rem]"
             }`}
           >
             {item.title}
           </motion.h2>
 
-          {/* 3. Supporting description */}
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.7 }}
-            className={`leading-relaxed text-white/70 mx-auto font-medium font-space ${
-              isPricing 
-                ? "text-[10px] sm:text-xs md:text-sm mb-4 max-w-xl" 
-                : "text-xs sm:text-sm md:text-base mb-6 max-w-2xl"
-            }`}
-          >
-            {item.body}
-          </motion.p>
+          {/* Body */}
+          {item.body && (
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2, duration: 0.7 }}
+              className={`leading-[1.75] text-white/75 mx-auto font-medium font-space ${
+                isPricing 
+                  ? "text-sm md:text-base mb-6 max-w-xl" 
+                  : "text-sm md:text-base mb-8 max-w-2xl"
+              }`}
+            >
+              {item.body}
+            </motion.p>
+          )}
 
-          {/* 4. Supporting visual/cards/buttons */}
+          {/* Steps (Why Different section) */}
+          {hasSteps && (
+            <StepsDisplay steps={item.steps} pills={item.pills} theme={item.theme} />
+          )}
+
+          {/* Pricing cards */}
           {item.priceCards ? (
             <PricingCards item={item} />
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 w-full max-w-3xl mb-6 text-left mx-auto">
+          ) : !hasSteps && item.points.length > 0 ? (
+            <div className={`grid gap-2.5 w-full max-w-3xl mb-6 text-left mx-auto ${
+              isAbout ? "grid-cols-1 max-w-lg" : "grid-cols-1 sm:grid-cols-2"
+            }`}>
               {item.points.map((point, pointIndex) => (
                 <motion.div
                   key={`${item.id}-${point}`}
                   initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: pointIndex * 0.04, duration: 0.5 }}
-                  className="flex items-center gap-3 rounded-xl border border-white/8 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/15 p-3 sm:p-3.5 backdrop-blur-xl transition duration-300 hover:scale-[1.02] shadow-sm font-space"
+                  transition={{ delay: pointIndex * 0.06, duration: 0.5 }}
+                  className={`flex items-center gap-3 rounded-xl border backdrop-blur-xl transition duration-300 shadow-sm font-space ${
+                    isAbout
+                      ? "border-white/10 bg-white/[0.04] hover:bg-white/[0.07] p-4"
+                      : "border-white/8 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/15 p-3 sm:p-3.5 hover:scale-[1.02]"
+                  }`}
                 >
                   <span className={`h-2 w-2 shrink-0 rounded-full bg-gradient-to-br ${item.theme} shadow-md`} />
-                  <span className="text-[11px] sm:text-xs md:text-sm font-semibold leading-relaxed text-white/85">{point}</span>
+                  <span className={`font-semibold leading-relaxed text-white/90 ${
+                    isAbout ? "text-sm md:text-base" : "text-[11px] sm:text-xs md:text-sm"
+                  }`}>{point}</span>
                 </motion.div>
               ))}
             </div>
+          ) : null}
+
+          {/* Suffix text (More Than Websites section) */}
+          {item.suffix && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="mt-1 mb-5 text-center"
+            >
+              <p className="text-sm font-bold text-cyan-300 font-space">{item.suffix}</p>
+              {item.suffixCta && (
+                <p className="mt-1 text-sm text-white/50 font-space">{item.suffixCta}</p>
+              )}
+            </motion.div>
           )}
 
-          {/* Node action buttons */}
-          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row w-full sm:w-auto z-10 relative mt-2">
-            {index < trail.length - 1 ? (
+          {/* Pricing footnote */}
+          {item.priceCards && (
+            <motion.p
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="mt-4 text-xs text-white/40 font-space text-center max-w-xl mx-auto leading-relaxed"
+            >
+              Need additional pages, features, integrations, or custom functionality? Everything can be added after approval.
+            </motion.p>
+          )}
+
+          {/* Node action buttons — middle sections: Next only. Pricing: primary CTA + Call. Last: primary CTA + Call. */}
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row w-full sm:w-auto z-10 relative mt-4">
+            {index < trail.length - 1 && item.id !== "pricing" ? (
+              /* Middle sections: Next Stage only */
               <motion.a
                 href={`#${trail[index + 1].id}`}
                 whileHover={{ scale: 1.03, boxShadow: "0 0 20px rgba(255, 255, 255, 0.15)" }}
                 whileTap={{ scale: 0.98 }}
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-2.5 md:py-3 font-space text-xs sm:text-sm font-black text-black shadow-xl transition duration-300 w-full sm:w-auto hover:bg-orange-200"
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-white/10 border border-white/15 px-7 py-3 font-space text-sm font-bold text-white backdrop-blur-xl transition duration-300 w-full sm:w-auto hover:bg-white/15"
               >
                 Next Stage ({trail[index + 1].number})
                 <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-x-1" />
               </motion.a>
             ) : (
-              <motion.a
-                href={owner.mailHref}
-                whileHover={{ scale: 1.03, boxShadow: "0 0 20px rgba(34, 211, 238, 0.3)" }}
-                whileTap={{ scale: 0.98 }}
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-2.5 md:py-3 font-space text-xs sm:text-sm font-black text-black shadow-xl transition duration-300 w-full sm:w-auto hover:bg-cyan-200"
-              >
-                Email Forchun
-                <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-x-1" />
-              </motion.a>
+              /* Pricing + final: Tell Me About My Business primary + phone secondary */
+              <>
+                <motion.a
+                  href={owner.mailHref}
+                  whileHover={{ scale: 1.03, boxShadow: "0 0 28px rgba(34, 211, 238, 0.45)" }}
+                  whileTap={{ scale: 0.98 }}
+                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 px-8 py-3.5 font-space text-sm font-black text-black shadow-xl transition duration-300 w-full sm:w-auto"
+                >
+                  Tell Me About My Business
+                  <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-x-1" />
+                </motion.a>
+                <motion.a
+                  href={owner.phoneHref}
+                  whileHover={{ scale: 1.03, backgroundColor: "rgba(255,255,255,0.12)", borderColor: "rgba(255,255,255,0.3)" }}
+                  whileTap={{ scale: 0.98 }}
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3.5 font-space text-sm font-bold text-white transition duration-300 backdrop-blur-xl w-full sm:w-auto"
+                >
+                  <PhoneCall className="h-4 w-4 sm:h-5 sm:w-5" />
+                  {owner.phone}
+                </motion.a>
+                <motion.a
+                  href="#footer-section"
+                  whileHover={{ scale: 1.03, backgroundColor: "rgba(255, 255, 255, 0.10)", borderColor: "rgba(255,255,255,0.3)" }}
+                  whileTap={{ scale: 0.98 }}
+                  className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-transparent px-6 py-3.5 font-space text-sm font-bold text-white/80 backdrop-blur-xl transition duration-300 w-full sm:w-auto hover:bg-white/10"
+                >
+                  <span>View Contact Details</span>
+                  <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 rotate-90 transition-transform group-hover:translate-y-0.5" />
+                </motion.a>
+              </>
             )}
-            <motion.a
-              href={owner.phoneHref}
-              whileHover={{ scale: 1.03, backgroundColor: "rgba(255, 255, 255, 1)", color: "rgba(0, 0, 0, 1)" }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-2.5 md:py-3 font-space text-xs sm:text-sm font-black text-white transition duration-300 backdrop-blur-xl w-full sm:w-auto"
-            >
-              <PhoneCall className="h-4 w-4 sm:h-5 sm:w-5" />
-              Call Forchun
-            </motion.a>
           </div>
         </div>
       </div>
@@ -747,6 +820,36 @@ const MiniMap = React.memo(function MiniMap({ activeSection }) {
             </a>
           );
         })}
+
+        {/* Footer Navigation Link */}
+        {(() => {
+          const isFooterActive = activeSection === "footer-section";
+          return (
+            <a
+              href="#footer-section"
+              aria-label="Go to Contact Details"
+              className={`relative flex h-10 w-10 items-center justify-center rounded-full font-space text-[10px] font-black transition-all duration-300 group ${
+                isFooterActive
+                  ? "bg-white text-black shadow-2xl shadow-white/30 scale-110"
+                  : "bg-white/5 text-white/50 hover:bg-white/15 hover:text-white"
+              }`}
+            >
+              {isFooterActive && (
+                <motion.div
+                  className="absolute inset-0 rounded-full bg-white/20"
+                  animate={{ scale: [1, 1.4, 1], opacity: [0.5, 0, 0.5] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+              )}
+              06
+
+              <div className="absolute right-14 top-1/2 -translate-y-1/2 scale-0 group-hover:scale-100 transition-all duration-300 origin-right rounded-xl border border-white/10 bg-black/85 px-3.5 py-2 text-[9px] font-space uppercase tracking-widest text-cyan-300 backdrop-blur-2xl whitespace-nowrap shadow-3xl pointer-events-none">
+                <span className="mr-1.5 opacity-40">06</span>
+                Contact Details
+              </div>
+            </a>
+          );
+        })()}
       </div>
     </div>
   );
@@ -766,7 +869,7 @@ const Hero = React.memo(function Hero({ smoothX, smoothY, isInView }) {
   return (
     <section 
       id="top-section" 
-      className="relative h-screen min-h-screen w-full overflow-hidden bg-[#030712] text-white flex items-center snap-start"
+      className="relative min-h-screen py-24 md:py-0 md:h-screen md:min-h-screen w-full overflow-visible md:overflow-hidden bg-[#030712] text-white flex items-center snap-start"
     >
       <FloatingWorld item={heroWorld} index={0} smoothX={smoothX} smoothY={smoothY} isInView={isInView} />
 
@@ -800,14 +903,14 @@ const Hero = React.memo(function Hero({ smoothX, smoothY, isInView }) {
         </div>
       )}
 
-      {/* Main Hero Container - Vertically Centered with explicit navbar top padding */}
+      {/* Main Hero Container */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pt-20 md:pt-24 pb-8 flex flex-col items-center text-center justify-start md:justify-center h-full">
         <div className="my-auto w-full flex flex-col items-center">
           
           {/* Animated Centered Mark */}
           <motion.div
             style={{ x, y, rotateX, rotateY, transformStyle: "preserve-3d" }}
-            className="relative mb-6 cursor-pointer group"
+            className="relative mb-8 cursor-pointer group"
           >
             <div className="absolute inset-0 rounded-[3.5rem] bg-cyan-400/20 blur-3xl scale-150 group-hover:scale-175 transition-all duration-500" />
             
@@ -832,11 +935,11 @@ const Hero = React.memo(function Hero({ smoothX, smoothY, isInView }) {
               }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >
-              <KorvynMark size="h-20 w-20 md:h-24 md:w-24" />
+              <KorvynMark size="h-20 w-20 md:h-28 md:w-28" />
             </motion.div>
           </motion.div>
 
-          {/* 1. Eyebrow Label */}
+          {/* Eyebrow Label */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -847,85 +950,105 @@ const Hero = React.memo(function Hero({ smoothX, smoothY, isInView }) {
             Korvyn Website Services
           </motion.div>
 
-          {/* 2. Massive Title */}
+          {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.05] tracking-tight text-white max-w-5xl"
+            className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.1] tracking-tight text-white max-w-4xl"
           >
-            Custom websites built around{" "}
+            Get a Custom Website Built for Your Business{" "}
             <span className="bg-gradient-to-r from-cyan-300 via-blue-400 via-violet-400 to-orange-400 bg-clip-text text-transparent">
-              your business.
+              Before You Pay a Dollar.
             </span>
           </motion.h1>
 
-          {/* 3. Supporting Paragraph */}
-          <motion.p
+          {/* Subheadline */}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.7 }}
-            className="mt-6 max-w-3xl text-xs sm:text-sm md:text-base leading-relaxed text-white/60 font-medium font-space"
+            className="mt-4 max-w-2xl font-space space-y-1.5"
           >
-            Get a direct project contact who helps turn your business information into a clean, professional website with clear pricing, simple steps, and support after launch.
-          </motion.p>
-
-          {/* 4. Supporting Visuals/Cards */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.65, duration: 0.7 }}
-            className="mt-8 grid w-full max-w-3xl gap-4 grid-cols-1 sm:grid-cols-3"
-          >
-            {[
-              ["Starter range", "$250–$450"],
-              ["Support", "2 weeks included"],
-              ["Contact", owner.phone],
-            ].map(([label, value]) => (
-              <div
-                key={label}
-                className="rounded-2xl border border-white/8 bg-white/[0.03] p-4 backdrop-blur-xl text-center hover:bg-white/[0.06] hover:border-white/15 transition duration-300 shadow-sm font-space"
-              >
-                <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/40">{label}</p>
-                <p className="mt-1 text-xs sm:text-sm md:text-base font-black text-white">{value}</p>
-              </div>
-            ))}
+            <p className="text-sm sm:text-base md:text-lg leading-relaxed text-white/70 font-semibold">
+              Most web designers ask for payment before showing you anything.
+            </p>
+            <p className="text-sm sm:text-base md:text-lg leading-relaxed text-cyan-300 font-extrabold mt-1">
+              I build your website first. Review it before deciding.
+            </p>
+            <p className="text-sm sm:text-base md:text-lg leading-relaxed text-white/60 font-medium">
+              Projects start at $450 with no obligation if it isn't the right fit.
+            </p>
           </motion.div>
 
           {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.7 }}
-            className="mt-8 flex flex-col items-center gap-3 sm:flex-row z-10 font-space"
+            transition={{ delay: 0.75, duration: 0.7 }}
+            className="mt-6 flex flex-col items-center gap-3 sm:flex-row z-10 font-space"
           >
-            <motion.a
-              href="#start"
-              whileHover={{ scale: 1.03, boxShadow: "0 0 25px rgba(34, 211, 238, 0.4)" }}
-              whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-orange-400 px-8 py-3 font-space text-xs sm:text-sm font-black text-black shadow-2xl transition duration-300"
-            >
-              Start Stage 01
-              <ArrowRight className="h-5 w-5" />
-            </motion.a>
+            {/* Primary */}
             <motion.a
               href={owner.mailHref}
-              whileHover={{ scale: 1.03, backgroundColor: "rgba(255, 255, 255, 1)", color: "rgba(0, 0, 0, 1)" }}
+              whileHover={{ scale: 1.04, boxShadow: "0 0 35px rgba(34, 211, 238, 0.55)" }}
               whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/12 bg-white/5 px-6 py-3 font-space text-xs sm:text-sm font-bold text-white backdrop-blur-xl transition duration-300"
+              className="inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 px-9 py-3.5 font-space text-sm sm:text-base font-black text-black shadow-2xl transition duration-300"
             >
-              <Mail className="h-5 w-5" />
-              Email Forchun
+              Tell Me About Your Business
+              <ArrowRight className="h-5 w-5" />
             </motion.a>
+            {/* Secondary */}
             <motion.a
-              href={owner.phoneHref}
-              whileHover={{ scale: 1.03, backgroundColor: "rgba(255, 255, 255, 1)", color: "rgba(0, 0, 0, 1)" }}
+              href="#what-i-build"
+              whileHover={{ scale: 1.03, backgroundColor: "rgba(255, 255, 255, 0.10)", borderColor: "rgba(255,255,255,0.3)" }}
               whileTap={{ scale: 0.98 }}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/12 bg-white/5 px-6 py-3 font-space text-xs sm:text-sm font-bold text-white backdrop-blur-xl transition duration-300"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-transparent px-7 py-3.5 font-space text-sm font-bold text-white/80 backdrop-blur-xl transition duration-300"
             >
-              <PhoneCall className="h-5 w-5" />
-              Call Forchun
+              View Recent Projects
+              <ArrowRight className="h-5 w-5" />
             </motion.a>
+          </motion.div>
+
+          {/* Trust badges */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.85, duration: 0.7 }}
+            className="mt-5 flex flex-wrap items-center justify-center gap-2.5 font-space"
+          >
+            {[
+              "✓ No Upfront Payment",
+              "✓ Review Before You Decide",
+              "✓ Projects Start At $450",
+              "✓ Built Directly By The Developer",
+            ].map((badge) => (
+              <span
+                key={badge}
+                className="inline-block rounded-full border border-white/10 bg-white/[0.05] px-4 py-1.5 text-[11px] sm:text-xs font-semibold text-white/65 backdrop-blur-xl"
+              >
+                {badge}
+              </span>
+            ))}
+          </motion.div>
+
+          {/* Social proof stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.95, duration: 0.7 }}
+            className="mt-7 flex flex-wrap items-center justify-center gap-6 font-space"
+          >
+            {[
+              { stat: "25+", label: "Projects Completed" },
+              { stat: "8 Years", label: "Sites & Software" },
+              { stat: "100%", label: "Custom Work Only" },
+            ].map(({ stat, label }) => (
+              <div key={label} className="text-center">
+                <p className="text-lg sm:text-xl font-black text-white">{stat}</p>
+                <p className="text-[11px] font-semibold text-white/40 uppercase tracking-widest">{label}</p>
+              </div>
+            ))}
           </motion.div>
         </div>
       </div>
@@ -937,7 +1060,7 @@ const Hero = React.memo(function Hero({ smoothX, smoothY, isInView }) {
 
 const Footer = React.memo(function Footer({ smoothX, smoothY, isInView }) {
   return (
-    <footer id="footer-section" className="relative h-screen min-h-screen w-full overflow-hidden bg-black text-center border-t border-white/5 flex items-center justify-center snap-start font-space">
+    <footer id="footer-section" className="relative min-h-screen py-24 md:py-0 md:h-screen md:min-h-screen w-full overflow-visible md:overflow-hidden bg-black text-center border-t border-white/5 flex items-center justify-center snap-start font-space">
       <FloatingWorld
         item={{ theme: "from-orange-300 via-cyan-300 to-blue-600", visual: "portal", creature: "whale" }}
         index={14}
@@ -956,60 +1079,66 @@ const Footer = React.memo(function Footer({ smoothX, smoothY, isInView }) {
             <div className="flex justify-center">
               <KorvynMark size="h-16 w-16" />
             </div>
-            <h2 className="mt-4 font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white">Korvyn</h2>
-            <p className="mt-1.5 font-space text-[10px] sm:text-xs font-bold tracking-[0.25em] text-cyan-400 uppercase">Custom Website Services</p>
-            
-            <div className="mx-auto mt-6 max-w-md w-full text-left">
-              <div className="space-y-3 rounded-[2rem] border border-white/8 bg-black/40 p-5 md:p-6 backdrop-blur text-xs sm:text-sm text-white/70">
-                <div className="flex justify-between items-center">
-                  <span className="text-[9px] font-bold text-white/40 uppercase tracking-[0.2em]">Website Portal</span>
-                  <p className="font-bold text-white">korvyn.site</p>
-                </div>
-                <div className="border-t border-white/5 pt-2 flex justify-between items-center">
-                  <span className="text-[9px] font-bold text-white/40 uppercase tracking-[0.2em]">Project Manager</span>
-                  <p className="font-bold text-white">{owner.name}</p>
-                </div>
-                <div className="border-t border-white/5 pt-2 flex justify-between items-center">
-                  <span className="text-[9px] font-bold text-white/40 uppercase tracking-[0.2em]">Email Channel</span>
-                  <p className="font-bold text-white">{owner.email}</p>
-                </div>
-                <div className="border-t border-white/5 pt-2 flex justify-between items-center">
-                  <span className="text-[9px] font-bold text-white/40 uppercase tracking-[0.2em]">Direct Phone Line</span>
-                  <p className="font-bold text-white">{owner.phone}</p>
-                </div>
-              </div>
+
+            <h2 className="mt-5 font-display text-2xl sm:text-3xl md:text-[2.4rem] font-extrabold leading-[1.15] tracking-tight text-white max-w-lg">
+              Ready To Talk About Your Business?
+            </h2>
+
+            <p className="mt-4 font-space text-sm sm:text-base text-white/65 max-w-sm leading-[1.7]">
+              Tell me about your business and I'll show you exactly what I can build for you.
+            </p>
+
+            <div className="flex flex-wrap items-center justify-center gap-2.5 mt-5">
+              {["No Upfront Payment", "No Pressure", "No Obligation"].map((pill) => (
+                <span key={pill} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-semibold text-white/70 font-space">
+                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-400/70" />
+                  {pill}
+                </span>
+              ))}
             </div>
-            
-            <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row w-full sm:w-auto">
-              <motion.a
-                href={owner.site}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.03, backgroundColor: "rgba(255, 255, 255, 1)", color: "rgba(0, 0, 0, 1)" }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/12 bg-white/5 px-6 py-2.5 font-space font-bold text-xs sm:text-sm text-white backdrop-blur-xl transition duration-300 w-full sm:w-auto"
-              >
-                Visit Website
-                <ExternalLink className="h-4 w-4" />
-              </motion.a>
+
+            {/* Primary CTA */}
+            <div className="mt-7 flex flex-col items-center gap-3 sm:flex-row w-full sm:w-auto">
               <motion.a
                 href={owner.mailHref}
-                whileHover={{ scale: 1.03, boxShadow: "0 0 20px rgba(34, 211, 238, 0.3)" }}
+                whileHover={{ scale: 1.04, boxShadow: "0 0 35px rgba(34, 211, 238, 0.5)" }}
                 whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-2.5 font-space font-black text-xs sm:text-sm text-black shadow-2xl transition duration-300 hover:bg-cyan-200 w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-violet-500 px-10 py-4 font-space font-black text-base sm:text-lg text-black shadow-2xl transition duration-300 w-full sm:w-auto"
               >
-                Email Forchun
-                <Mail className="h-4 w-4" />
+                Tell Me About My Business
+                <ArrowRight className="h-5 w-5" />
               </motion.a>
               <motion.a
                 href={owner.phoneHref}
-                whileHover={{ scale: 1.03, backgroundColor: "rgba(255, 255, 255, 1)", color: "rgba(0, 0, 0, 1)" }}
+                whileHover={{ scale: 1.03, backgroundColor: "rgba(255, 255, 255, 0.10)", borderColor: "rgba(255,255,255,0.3)" }}
                 whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/12 bg-white/5 px-6 py-2.5 font-space font-bold text-xs sm:text-sm text-white backdrop-blur-xl transition duration-300 w-full sm:w-auto"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-7 py-3.5 font-space font-bold text-sm text-white backdrop-blur-xl transition duration-300 w-full sm:w-auto"
               >
-                Call Forchun
                 <PhoneCall className="h-4 w-4" />
+                {owner.phone}
               </motion.a>
+            </div>
+
+            {/* Contact info strip */}
+            <div className="mx-auto mt-7 max-w-md w-full text-left">
+              <div className="space-y-3 rounded-[2rem] border border-white/8 bg-black/40 p-5 md:p-6 backdrop-blur text-xs sm:text-sm text-white/70">
+                <div className="flex justify-between items-center">
+                  <span className="text-[9px] font-bold text-white/40 uppercase tracking-[0.2em]">Website</span>
+                  <p className="font-bold text-white">korvyn.site</p>
+                </div>
+                <div className="border-t border-white/5 pt-2.5 flex justify-between items-center">
+                  <span className="text-[9px] font-bold text-white/40 uppercase tracking-[0.2em]">Developer</span>
+                  <p className="font-bold text-white">{owner.name}</p>
+                </div>
+                <div className="border-t border-white/5 pt-2.5 flex justify-between items-center">
+                  <span className="text-[9px] font-bold text-white/40 uppercase tracking-[0.2em]">Email</span>
+                  <a href={owner.mailHref} className="font-bold text-white hover:text-cyan-300 transition-colors">{owner.email}</a>
+                </div>
+                <div className="border-t border-white/5 pt-2.5 flex justify-between items-center">
+                  <span className="text-[9px] font-bold text-white/40 uppercase tracking-[0.2em]">Phone</span>
+                  <a href={owner.phoneHref} className="font-bold text-white hover:text-cyan-300 transition-colors">{owner.phone}</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1020,7 +1149,7 @@ const Footer = React.memo(function Footer({ smoothX, smoothY, isInView }) {
 
 export default function KorvynCandyTrailWebsite() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("start");
+  const [activeSection, setActiveSection] = useState("why-different");
   const nav = useMemo(() => trail, []);
   const { smoothX, smoothY } = useMouseParallax();
 
@@ -1060,8 +1189,8 @@ export default function KorvynCandyTrailWebsite() {
 
   const getIsInView = (id, index) => {
     if (activeSection === id) return true;
-    if (activeSection === "top-section" && id === "start") return true;
-    if (activeSection === "footer-section" && id === "next-step") return true;
+    if (activeSection === "top-section" && id === "why-different") return true;
+    if (activeSection === "footer-section" && id === "pricing") return true;
     
     const activeIndex = trail.findIndex((t) => t.id === activeSection);
     if (activeIndex !== -1) {
@@ -1073,7 +1202,7 @@ export default function KorvynCandyTrailWebsite() {
   return (
     <main className="scroll-container w-full bg-[#030712] text-white selection:bg-orange-400 selection:text-black font-space">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700;800;900&display=swap');
         
         *, *::before, *::after { box-sizing: border-box; }
         html, body { 
@@ -1088,25 +1217,33 @@ export default function KorvynCandyTrailWebsite() {
           height: 100dvh;
           width: 100%;
           overflow-y: auto;
-          scroll-snap-type: y mandatory;
           scroll-behavior: smooth;
           -webkit-overflow-scrolling: touch;
         }
-        main { font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif; }
+        @media (min-width: 768px) {
+          .scroll-container {
+            scroll-snap-type: y mandatory;
+          }
+        }
+        main { font-family: 'Inter', 'Manrope', ui-sans-serif, system-ui, sans-serif; }
         section, footer {
-          height: 100vh;
-          height: 100dvh;
           min-height: 100vh;
           min-height: 100dvh;
-          scroll-snap-align: start;
-          scroll-snap-stop: always;
           flex-shrink: 0;
           position: relative;
-          overflow: hidden;
         }
-        .font-display { font-family: 'Space Grotesk', 'Manrope', ui-sans-serif, system-ui, sans-serif; }
-        .font-space { font-family: 'Space Grotesk', sans-serif; }
-        .font-accent { font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; letter-spacing: 0.25em; }
+        @media (min-width: 768px) {
+          section, footer {
+            height: 100vh;
+            height: 100dvh;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            overflow: hidden;
+          }
+        }
+        .font-display { font-family: 'Inter', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif; }
+        .font-space { font-family: 'Inter', 'Space Grotesk', sans-serif; }
+        .font-accent { font-family: 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.25em; }
       `}</style>
 
       <ScrollProgress />
@@ -1121,22 +1258,29 @@ export default function KorvynCandyTrailWebsite() {
             </div>
           </a>
 
-          <div className="hidden items-center gap-3 lg:flex">
-            <motion.a
-              href={owner.phoneHref}
-              whileHover={{ scale: 1.03, backgroundColor: "rgba(255,255,255,0.15)", borderColor: "rgba(255,255,255,0.3)" }}
-              whileTap={{ scale: 0.97 }}
-              className="rounded-full border border-white/12 bg-white/5 px-6 py-2.5 font-space text-xs font-bold text-white/80 backdrop-blur-xl transition duration-300"
-            >
-              Call Forchun
-            </motion.a>
+          {/* Desktop nav right side: phone + email text + single CTA */}
+          <div className="hidden items-center gap-5 lg:flex">
+            <div className="flex flex-col items-end gap-0.5">
+              <a
+                href={owner.phoneHref}
+                className="text-xs font-bold text-white/70 hover:text-white transition-colors font-space tracking-wide"
+              >
+                {owner.phone}
+              </a>
+              <a
+                href={owner.mailHref}
+                className="text-[10px] font-medium text-white/40 hover:text-cyan-300 transition-colors font-space"
+              >
+                {owner.email}
+              </a>
+            </div>
             <motion.a
               href={owner.mailHref}
               whileHover={{ scale: 1.03, backgroundColor: "rgb(204, 251, 241)", boxShadow: "0 0 15px rgba(34, 211, 238, 0.3)" }}
               whileTap={{ scale: 0.97 }}
-              className="rounded-full bg-white px-6 py-2.5 font-space text-xs font-black text-black shadow-lg transition duration-300"
+              className="rounded-full bg-white px-6 py-2.5 font-space text-xs font-black text-black shadow-lg transition duration-300 whitespace-nowrap"
             >
-              Email Forchun
+              Tell Me About My Business
             </motion.a>
           </div>
 
@@ -1166,6 +1310,17 @@ export default function KorvynCandyTrailWebsite() {
                   <span className="text-[10px] text-white/30 uppercase tracking-widest font-space">{item.world}</span>
                 </a>
               ))}
+              <a
+                href="#footer-section"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center justify-between rounded-2xl px-4 py-3 text-sm text-white/80 hover:bg-white/5 transition"
+              >
+                <span>
+                  <span className="mr-3 font-black text-cyan-400">06</span>
+                  Contact details
+                </span>
+                <span className="text-[10px] text-white/30 uppercase tracking-widest font-space">Contact</span>
+              </a>
             </div>
             <div className="mt-6 grid gap-3 border-t border-white/5 pt-6">
               <a
@@ -1173,14 +1328,14 @@ export default function KorvynCandyTrailWebsite() {
                 onClick={() => setMenuOpen(false)}
                 className="block rounded-2xl bg-white py-3.5 text-center font-space font-black text-black"
               >
-                Call Forchun ({owner.phone})
+                {owner.phone}
               </a>
               <a
                 href={owner.mailHref}
                 onClick={() => setMenuOpen(false)}
                 className="block rounded-2xl border border-white/10 bg-white/5 py-3.5 text-center font-space font-black text-white"
               >
-                Email Forchun ({owner.email})
+                Tell Me About My Business
               </a>
             </div>
           </div>
@@ -1190,7 +1345,7 @@ export default function KorvynCandyTrailWebsite() {
       <MiniMap activeSection={activeSection} />
       <div id="top" />
       
-      <Hero smoothX={smoothX} smoothY={smoothY} isInView={activeSection === "top-section" || activeSection === "start"} />
+      <Hero smoothX={smoothX} smoothY={smoothY} isInView={activeSection === "top-section" || activeSection === "why-different"} />
 
       {trail.map((item, index) => (
         <TrailNode 
@@ -1203,7 +1358,7 @@ export default function KorvynCandyTrailWebsite() {
         />
       ))}
 
-      <Footer smoothX={smoothX} smoothY={smoothY} isInView={activeSection === "footer-section" || activeSection === "next-step"} />
+      <Footer smoothX={smoothX} smoothY={smoothY} isInView={activeSection === "footer-section" || activeSection === "pricing"} />
     </main>
   );
 }
